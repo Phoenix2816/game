@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
+  <title>Welsh Dragon Game</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      touch-action: manipulation;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top, #214b30 0%, #102417 70%);
+      color: white;
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      padding: 14px;
+    }
+
+    .layout {
+      width: 100%;
+      max-width: 1200px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 20px;
+      align-items: start;
+    }
+
+.wrapper {
+  width: 100%;
+  max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+}
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 16px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+    }
+
+    .title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #ff5b5b;
+      letter-spacing: 1px;
+    }
+
+    .score-box {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    canvas {
+      width: 100%;
+      aspect-ratio: 1/1;
+      background: #214b30;
+      border-radius: 24px;
+      border: 4px solid rgba(255,255,255,0.15);
+      box-shadow:
+        0 0 30px rgba(0,0,0,0.4),
+        inset 0 0 20px rgba(255,255,255,0.05);
+    }
+
+  .leaderboard {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 22px;
+    padding: 18px;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: 700px;
+  }
+
+  .leaderboard h2 {
+    margin-bottom: 14px;
+    font-size: 1.3rem;
+    color: #ffd166;
+  }
+
+  .leaderboard-scroll {
+    overflow-y: auto;
+    max-height: 520px;
+    padding-right: 4px;
+  }
+
+  .leaderboard-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .leaderboard-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+  }
+
+  .dragon-link {
+    width: 100%;
+    margin-top: 18px;
+    border-radius: 18px;
+    object-fit: cover;
+  }
+
+    .leaderboard-entry {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .leaderboard-entry.top1 {
+      background: linear-gradient(90deg, #ffd700, #ffb700);
+      color: black;
+      font-weight: bold;
+    }
+
+    .leaderboard-entry.top2 {
+      background: linear-gradient(90deg, #e3e3e3, #bdbdbd);
+      color: black;
+      font-weight: bold;
+    }
+
+    .leaderboard-entry.top3 {
+      background: linear-gradient(90deg, #cd7f32, #9c5a1f);
+      color: white;
+      font-weight: bold;
+    }
+
+    .empty {
+      visibility: hidden;
+    }
+.name-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 18px;
+
+  border-radius: 20px;
+
+  background:
+    rgba(255,255,255,0.04);
+
+  border:
+    1px solid rgba(255,255,255,0.06);
+}
+
+.name-label {
+  text-align: left;
+
+  font-size: 0.95rem;
+
+  font-weight: bold;
+
+  color: #ffd166;
+
+  padding-left: 4px;
+}
+
+.restart-section {
+  width: 100%;
+
+  margin-top: 8px;
+
+  padding-top: 18px;
+
+  border-top:
+    1px solid rgba(255,255,255,0.08);
+}
+
+.restart-section button {
+  width: 100%;
+
+  padding: 16px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ff4b4b,
+      #ff7b00
+    );
+
+  color: white;
+
+  font-size: 1rem;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+
+  box-shadow:
+    0 10px 25px rgba(255,80,80,0.35);
+}
+
+.restart-section button:hover {
+  transform: translateY(-2px);
+}
+
+.restart-section button:active {
+  transform: scale(0.98);
+}
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  border-radius: 24px;
+  overflow: hidden;
+  z-index: 20;
+
+  background:
+    rgba(0,0,0,0.72);
+
+  backdrop-filter: blur(8px);
+}
+
+.game-over-card {
+  width: 88%;
+  max-width: 360px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(35,35,35,0.96),
+      rgba(18,18,18,0.96)
+    );
+
+  border:
+    1px solid rgba(255,255,255,0.08);
+
+  border-radius: 28px;
+
+  padding: 34px 26px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+
+  box-shadow:
+    0 25px 60px rgba(0,0,0,0.5),
+    inset 0 0 25px rgba(255,255,255,0.03);
+
+  animation: popup 0.25s ease;
+}
+
+@keyframes popup {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.dragon-icon {
+  font-size: 3.5rem;
+  filter: drop-shadow(0 0 12px rgba(255,80,80,0.7));
+}
+
+.overlay h1 {
+  font-size: 2.2rem;
+  color: #ff5b5b;
+  margin-top: -6px;
+}
+
+.overlay p {
+  font-size: 1.1rem;
+  opacity: 0.85;
+}
+
+.input-wrapper {
+  width: 100%;
+  position: relative;
+}
+
+.overlay input {
+  width: 100%;
+
+  padding: 16px 18px;
+
+  border-radius: 16px;
+
+  border:
+    2px solid rgba(255,255,255,0.08);
+
+  background:
+    rgba(255,255,255,0.06);
+
+  color: white;
+
+  font-size: 1rem;
+
+  outline: none;
+
+  text-align: center;
+
+  transition: 0.2s;
+
+  position: relative;
+  z-index: 2;
+}
+
+.overlay input::placeholder {
+  color: rgba(255,255,255,0.45);
+}
+
+.overlay input:focus {
+  border-color: #ff5b5b;
+
+  background:
+    rgba(255,255,255,0.09);
+
+  transform: scale(1.02);
+}
+
+.input-glow {
+  position: absolute;
+  inset: 0;
+
+  border-radius: 16px;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,90,90,0.35),
+      transparent 70%
+    );
+
+  opacity: 0;
+  transition: 0.25s;
+}
+
+.overlay input:focus + .input-glow {
+  opacity: 1;
+}
+
+.overlay button {
+  width: 100%;
+
+  padding: 16px;
+
+  border: none;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ff4b4b,
+      #ff7b00
+    );
+
+  color: white;
+
+  font-size: 1rem;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+
+  box-shadow:
+    0 10px 25px rgba(255,80,80,0.35);
+}
+
+.overlay button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 16px 35px rgba(255,80,80,0.45);
+}
+
+.overlay button:active {
+  transform: scale(0.98);
+}
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+
+
+      .title {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="layout">
+
+    <div class="wrapper">
+
+      <div class="topbar">
+        <div class="title">Welsh Dragon</div>
+
+        <div class="score-box">
+          Score:
+          <span id="score">0</span>
+        </div>
+      </div>
+
+      <canvas id="game" width="600" height="600"></canvas>
+
+<div class="overlay" id="overlay">
+
+  <div class="game-over-card">
+
+    <h1>Game Over</h1>
+
+    <p id="final"></p>
+
+    <div class="name-section">
+
+      <label class="name-label">
+        Add Your Name
+      </label>
+
+      <div class="input-wrapper">
+
+        <input
+          id="playerName"
+          type="text"
+          maxlength="12"
+          placeholder="Enter dragon name..."
+          autocomplete="off"
+        />
+
+        <div class="input-glow"></div>
+
+      </div>
+
+    </div>
+
+    <div class="restart-section">
+
+      <button onclick="restartGame()">
+        Restart Game
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+    </div>
+
+  <div class="leaderboard">
+
+    <h2>Leaderboard</h2>
+
+    <div
+      id="leaderboard"
+      class="leaderboard-scroll"
+    ></div>
+
+    <img
+      src="link.png"
+      class="dragon-link"
+      alt="Link to the test"
+    />
+
+  </div>
+  </div>
+
+
+  <script>
+    const canvas = document.getElementById('game');
+    const ctx = canvas.getContext('2d');
+
+    const grid = 24;
+    const count = canvas.width / grid;
+
+    const scoreEl = document.getElementById('score');
+    const overlay = document.getElementById('overlay');
+    const final = document.getElementById('final');
+    const leaderboardEl =
+      document.getElementById('leaderboard');
+
+    let dragon = [
+      { x: 10, y: 10 },
+      { x: 9, y: 10 },
+      { x: 8, y: 10 }
+    ];
+  let dx = 0;
+  let dy = 0;
+
+  let nextDx = 0;
+  let nextDy = 0;
+  let visualHeadX = dragon[0].x;
+  let visualHeadY = dragon[0].y;
+
+  let lastMoveTime = 0;
+  const moveDelay = 110;
+  let directionLocked = false;
+  let gameStarted = false;
+
+    let apple = { x: 15, y: 15 };
+
+    let score = 0;
+    let running = true;
+
+    function drawGrid() {
+      ctx.fillStyle = '#214b30';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      for (let x = 0; x < count; x++) {
+        for (let y = 0; y < count; y++) {
+          if ((x + y) % 2 === 0) {
+            ctx.fillStyle = '#29593b';
+
+            ctx.fillRect(
+              x * grid,
+              y * grid,
+              grid,
+              grid
+            );
+          }
+        }
+      }
+    }
+
+    function drawApple() {
+      const x = apple.x * grid;
+      const y = apple.y * grid;
+
+      ctx.shadowColor = '#ff0000';
+      ctx.shadowBlur = 15;
+
+      ctx.fillStyle = '#d90429';
+
+      ctx.beginPath();
+      ctx.arc(x + 12, y + 14, 8, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.shadowBlur = 0;
+
+      ctx.strokeStyle = '#4d2c13';
+      ctx.lineWidth = 2;
+
+      ctx.beginPath();
+      ctx.moveTo(x + 12, y + 8);
+      ctx.lineTo(x + 12, y + 2);
+      ctx.stroke();
+
+      ctx.fillStyle = '#6cc551';
+
+      ctx.beginPath();
+      ctx.ellipse(
+        x + 16,
+        y + 4,
+        4,
+        2,
+        0.5,
+        0,
+        Math.PI * 2
+      );
+
+      ctx.fill();
+    }
+function drawDragonPart(part, index) {
+  let renderX = part.x;
+  let renderY = part.y;
+
+  // smooth head rendering
+  if (index === 0) {
+    renderX = visualHeadX;
+    renderY = visualHeadY;
+  }
+
+  const x = renderX * grid;
+  const y = renderY * grid;
+
+  const isHead = index === 0;
+  const isTail = index === dragon.length - 1;
+
+  const centerX = x + grid / 2;
+  const centerY = y + grid / 2;
+
+  // BODY CONNECTION
+  if (!isTail) {
+    const next = dragon[index + 1];
+
+    const nextX = next.x * grid + grid / 2;
+    const nextY = next.y * grid + grid / 2;
+
+    const bodyGradient = ctx.createLinearGradient(
+      centerX,
+      centerY,
+      nextX,
+      nextY
+    );
+
+    bodyGradient.addColorStop(0, "#ff4d6d");
+    bodyGradient.addColorStop(1, "#6a040f");
+
+    ctx.strokeStyle = bodyGradient;
+    ctx.lineWidth = isHead ? 18 : 14;
+    ctx.lineCap = "round";
+
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.lineTo(nextX, nextY);
+    ctx.stroke();
+  }
+
+  // BODY SEGMENT
+  const gradient = ctx.createRadialGradient(
+    centerX,
+    centerY,
+    2,
+    centerX,
+    centerY,
+    14
+  );
+
+  gradient.addColorStop(
+    0,
+    isHead ? "#ff758f" : "#ef233c"
+  );
+
+  gradient.addColorStop(1, "#5a0000");
+
+  ctx.fillStyle = gradient;
+
+  ctx.beginPath();
+
+  ctx.ellipse(
+    centerX,
+    centerY,
+    isHead ? 14 : 10,
+    isHead ? 13 : 8,
+    0,
+    0,
+    Math.PI * 2
+  );
+
+  ctx.fill();
+
+  // SCALES / SPINES
+  ctx.fillStyle = "#ffccd5";
+
+  for (let i = 0; i < 4; i++) {
+    ctx.beginPath();
+
+    ctx.arc(
+      x + 5 + i * 4,
+      y + 7,
+      1.2,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.fill();
+  }
+
+  // DRAGON WINGS
+  if (!isHead && !isTail && index % 2 === 0) {
+    ctx.fillStyle = "#ff8fab";
+
+    // LEFT WING
+    ctx.beginPath();
+    ctx.moveTo(centerX - 2, centerY);
+    ctx.lineTo(centerX - 20, centerY - 12);
+    ctx.lineTo(centerX - 10, centerY + 10);
+    ctx.fill();
+
+    // RIGHT WING
+    ctx.beginPath();
+    ctx.moveTo(centerX + 2, centerY);
+    ctx.lineTo(centerX + 20, centerY - 12);
+    ctx.lineTo(centerX + 10, centerY + 10);
+    ctx.fill();
+
+    // WING BONES
+    ctx.strokeStyle = "#ffd6e0";
+    ctx.lineWidth = 1;
+
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.lineTo(centerX - 16, centerY - 8);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.lineTo(centerX + 16, centerY - 8);
+    ctx.stroke();
+  }
+
+  // CLAWS
+  if (!isHead && !isTail) {
+    ctx.strokeStyle = "#ffe066";
+    ctx.lineWidth = 1.5;
+
+    ctx.beginPath();
+    ctx.moveTo(centerX - 5, centerY + 5);
+    ctx.lineTo(centerX - 9, centerY + 12);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(centerX + 5, centerY + 5);
+    ctx.lineTo(centerX + 9, centerY + 12);
+    ctx.stroke();
+  }
+
+  // HEAD
+  if (isHead) {
+    ctx.shadowColor = "#ff4d6d";
+    ctx.shadowBlur = 15;
+
+    // HORNS
+    ctx.strokeStyle = "#ffe066";
+    ctx.lineWidth = 3;
+
+    ctx.beginPath();
+    ctx.moveTo(centerX - 6, centerY - 8);
+    ctx.lineTo(centerX - 12, centerY - 20);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(centerX + 6, centerY - 8);
+    ctx.lineTo(centerX + 12, centerY - 20);
+    ctx.stroke();
+
+    // JAW / SNOUT
+    ctx.fillStyle = "#c1121f";
+
+    ctx.beginPath();
+    ctx.ellipse(
+      centerX,
+      centerY + 8,
+      9,
+      6,
+      0,
+      0,
+      Math.PI * 2
+    );
+
+    ctx.fill();
+
+    // EYES
+    ctx.fillStyle = "#ffffff";
+
+    ctx.beginPath();
+    ctx.arc(centerX - 5, centerY - 2, 2.8, 0, Math.PI * 2);
+    ctx.arc(centerX + 5, centerY - 2, 2.8, 0, Math.PI * 2);
+    ctx.fill();
+
+    // GLOWING PUPILS
+    ctx.fillStyle = "#00ff99";
+
+    ctx.beginPath();
+    ctx.arc(centerX - 5, centerY - 2, 1.2, 0, Math.PI * 2);
+    ctx.arc(centerX + 5, centerY - 2, 1.2, 0, Math.PI * 2);
+    ctx.fill();
+
+    // NOSTRILS
+    ctx.fillStyle = "#111";
+
+    ctx.beginPath();
+    ctx.arc(centerX - 2, centerY + 8, 1, 0, Math.PI * 2);
+    ctx.arc(centerX + 2, centerY + 8, 1, 0, Math.PI * 2);
+    ctx.fill();
+
+    // FIRE BREATH
+    ctx.fillStyle = "#ff8500";
+
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY + 14);
+    ctx.lineTo(centerX - 5, centerY + 28);
+    ctx.lineTo(centerX, centerY + 24);
+    ctx.lineTo(centerX + 5, centerY + 28);
+    ctx.fill();
+
+    ctx.fillStyle = "#ffd166";
+
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY + 16);
+    ctx.lineTo(centerX - 2, centerY + 24);
+    ctx.lineTo(centerX, centerY + 22);
+    ctx.lineTo(centerX + 2, centerY + 24);
+    ctx.fill();
+
+    ctx.shadowBlur = 0;
+  }
+
+  // TAIL
+  if (isTail) {
+    ctx.fillStyle = "#ffe066";
+
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY - 10);
+    ctx.lineTo(centerX + 8, centerY + 10);
+    ctx.lineTo(centerX, centerY + 6);
+    ctx.lineTo(centerX - 8, centerY + 10);
+    ctx.fill();
+  }
+}
+
+
+
+function drawDragon() {
+      dragon.forEach((part, index) => {
+        drawDragonPart(part, index);
+      });
+    }
+
+    function spawnApple() {
+      let validPosition = false;
+
+      while (!validPosition) {
+        apple.x =
+          Math.floor(Math.random() * count);
+
+        apple.y =
+          Math.floor(Math.random() * count);
+
+        validPosition = true;
+
+        for (const segment of dragon) {
+          if (
+            segment.x === apple.x &&
+            segment.y === apple.y
+          ) {
+            validPosition = false;
+            break;
+          }
+        }
+      }
+    }
+function move() {
+  if (!gameStarted) return;
+
+  dx = nextDx;
+  dy = nextDy;
+
+  directionLocked = false;
+
+  const head = {
+    x: dragon[0].x + dx,
+    y: dragon[0].y + dy
+  };
+
+  // SOFTER BORDER COLLISION
+  // allows dragon to fully enter last visible tile
+  if (
+    head.x < 0 ||
+    head.y < 0 ||
+    head.x > count - 1 ||
+    head.y > count - 1
+  ) {
+    endGame();
+    return;
+  }
+
+  // ignore last tail segment because it moves away
+  for (let i = 0; i < dragon.length - 1; i++) {
+    const segment = dragon[i];
+
+    if (
+      head.x === segment.x &&
+      head.y === segment.y
+    ) {
+      endGame();
+      return;
+    }
+  }
+
+  dragon.unshift(head);
+
+  if (
+    head.x === apple.x &&
+    head.y === apple.y
+  ) {
+    score++;
+
+    scoreEl.textContent = score;
+
+    spawnApple();
+  } else {
+    dragon.pop();
+  }
+}
+
+function gameLoop(timestamp = 0) {
+  if (running && gameStarted) {
+
+    // move only every moveDelay ms
+    if (timestamp - lastMoveTime >= moveDelay) {
+      move();
+
+      lastMoveTime = timestamp;
+    }
+
+    // smooth interpolation
+    visualHeadX += (dragon[0].x - visualHeadX) * 0.35;
+    visualHeadY += (dragon[0].y - visualHeadY) * 0.35;
+  }
+
+  drawGrid();
+  drawApple();
+  drawDragon();
+
+  requestAnimationFrame(gameLoop);
+}
+
+
+let scoreSaved = false;
+
+function endGame() {
+  running = false;
+
+  overlay.style.display = 'flex';
+
+  final.textContent =
+    `Final Score: ${score}`;
+
+  const input =
+    document.getElementById('playerName');
+
+  input.focus();
+
+  scoreSaved = false;
+
+  input.onkeydown = e => {
+    if (e.key === 'Enter') {
+      saveCurrentScore();
+    }
+  };
+
+  input.onblur = () => {
+    saveCurrentScore();
+  };
+}
+
+function saveCurrentScore() {
+  if (scoreSaved) return;
+
+  const input =
+    document.getElementById('playerName');
+
+  const name =
+    input.value.trim();
+
+  if (score > 0 && name !== '') {
+    saveLeaderboard(name, score);
+
+    scoreSaved = true;
+  }
+}
+
+function restartGame() {
+  saveCurrentScore();
+
+  const input =
+    document.getElementById(
+      'playerName'
+    );
+
+  input.value = '';
+
+  dragon = [
+    { x: 10, y: 10 },
+    { x: 9, y: 10 },
+    { x: 8, y: 10 }
+  ];
+
+  dx = 0;
+  dy = 0;
+  nextDx = 0;
+  nextDy = 0;
+
+  directionLocked = false;
+  gameStarted = false;
+
+  score = 0;
+
+  scoreEl.textContent = 0;
+
+  running = true;
+
+  overlay.style.display = 'none';
+
+  spawnApple();
+}
+function setDirection(dir) {
+  // Prevent multiple inputs in same frame
+  if (directionLocked) return;
+
+  let newDx = dx;
+  let newDy = dy;
+
+  // START GAME
+  if (!gameStarted) {
+    if (dir === 'left') return;
+
+    gameStarted = true;
+  }
+
+  if (dir === 'up' && dy !== 1) {
+    newDx = 0;
+    newDy = -1;
+  }
+
+  else if (dir === 'down' && dy !== -1) {
+    newDx = 0;
+    newDy = 1;
+  }
+
+  else if (dir === 'left' && dx !== 1) {
+    newDx = -1;
+    newDy = 0;
+  }
+
+  else if (dir === 'right' && dx !== -1) {
+    newDx = 1;
+    newDy = 0;
+  }
+
+  // Ignore invalid reverse moves
+  else {
+    return;
+  }
+
+  nextDx = newDx;
+  nextDy = newDy;
+
+  directionLocked = true;
+}
+
+
+
+document.addEventListener('keydown', e => {
+  switch (e.key) {
+    case 'ArrowUp':
+    case 'w':
+      setDirection('up');
+      break;
+
+    case 'ArrowDown':
+    case 's':
+      setDirection('down');
+      break;
+
+    case 'ArrowLeft':
+    case 'a':
+      setDirection('left');
+      break;
+
+    case 'ArrowRight':
+    case 'd':
+      setDirection('right');
+      break;
+  }
+});
+
+    function saveLeaderboard(
+      name,
+      newScore
+    ) {
+      if (!name) return;
+
+      let scores = JSON.parse(
+        localStorage.getItem(
+          'dragonLeaderboard'
+        ) || '[]'
+      );
+
+      scores.push({
+        name: name,
+        score: Number(newScore)
+      });
+
+      scores = scores.filter(
+        entry =>
+          entry &&
+          typeof entry.name === 'string' &&
+          !isNaN(entry.score)
+      );
+
+      scores.sort(
+        (a, b) =>
+          b.score - a.score
+      );
+
+      scores = scores
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 10);
+
+      localStorage.setItem(
+        'dragonLeaderboard',
+        JSON.stringify(scores)
+      );
+
+      renderLeaderboard();
+    }
+
+    function renderLeaderboard() {
+      let scores = JSON.parse(
+        localStorage.getItem(
+          'dragonLeaderboard'
+        ) || '[]'
+      );
+
+      scores = scores.filter(
+        entry =>
+          entry &&
+          typeof entry.name === 'string' &&
+          !isNaN(entry.score)
+      );
+
+      if (scores.length === 0) {
+        leaderboardEl.innerHTML =
+          '<div style="opacity:.7">No scores yet</div>';
+
+        return;
+      }
+
+      leaderboardEl.innerHTML =
+        scores
+          .map((entry, i) => {
+            let extraClass = '';
+
+            if (i === 0)
+              extraClass = 'top1';
+
+            else if (i === 1)
+              extraClass = 'top2';
+
+            else if (i === 2)
+              extraClass = 'top3';
+
+            return `
+              <div class="leaderboard-entry ${extraClass}">
+                <span>#${i + 1} ${entry.name}</span>
+                <span>${entry.score}</span>
+              </div>
+            `;
+          })
+          .join('');
+    }
+
+    renderLeaderboard();
+
+    spawnApple();
+
+    requestAnimationFrame(gameLoop);
+  </script>
+</body>
+</html>
