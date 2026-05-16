@@ -872,51 +872,88 @@ function drawDragon() {
       }
     }
 
-    function autoPlay() {
+function autoPlay() {
   const head = dragon[0];
 
-  // move toward beer
-  if (apple.x > head.x && dx !== -1) {
-    nextDx = 1;
-    nextDy = 0;
+  const directions = [
+    { dx: 1, dy: 0 },
+    { dx: -1, dy: 0 },
+    { dx: 0, dy: 1 },
+    { dx: 0, dy: -1 }
+  ];
+
+  const validDirections = directions.filter(dir => {
+    return !(dir.dx === -dx && dir.dy === -dy);
+  });
+
+  function isSafe(x, y) {
+    if (x < 0 || y < 0 || x >= count || y >= count) return false;
+    const tailMoves = (head.x === apple.x && head.y === apple.y) ? 0 : 1;
+    for (let i = 0; i < dragon.length - tailMoves; i++) {
+      if (dragon[i].x === x && dragon[i].y === y) return false;
+    }
+    return true;
   }
 
-  else if (apple.x < head.x && dx !== 1) {
-    nextDx = -1;
-    nextDy = 0;
+  function floodFill(startX, startY, visitedSet) {
+    if (!isSafe(startX, startY)) return 0;
+    const key = startX + ',' + startY;
+    if (visitedSet.has(key)) return 0;
+    visitedSet.add(key);
+    let count = 1;
+    const stack = [{x: startX, y: startY}];
+    while (stack.length > 0) {
+      const cur = stack.pop();
+      for (let d = 0; d < directions.length; d++) {
+        const dir = directions[d];
+        const nx = cur.x + dir.dx;
+        const ny = cur.y + dir.dy;
+        const nKey = nx + ',' + ny;
+        if (isSafe(nx, ny) && !visitedSet.has(nKey)) {
+          visitedSet.add(nKey);
+          count++;
+          stack.push({x: nx, y: ny});
+        }
+      }
+    }
+    return count;
   }
 
-  else if (apple.y > head.y && dy !== -1) {
-    nextDx = 0;
-    nextDy = 1;
-  }
+  const rankedMoves = validDirections.map(dir => {
+    const nx = head.x + dir.dx;
+    const ny = head.y + dir.dy;
+    const distance = Math.abs(apple.x - nx) + Math.abs(apple.y - ny);
+    if (!isSafe(nx, ny)) {
+      return { dx: dir.dx, dy: dir.dy, x: nx, y: ny, distance: distance, safe: false, reachable: 0, canReachApple: false };
+    }
+    const visited = new Set();
+    const reachable = floodFill(nx, ny, visited);
+    const appleKey = apple.x + ',' + apple.y;
+    const canReachApple = visited.has(appleKey);
+    return { dx: dir.dx, dy: dir.dy, x: nx, y: ny, distance: distance, safe: true, reachable: reachable, canReachApple: canReachApple };
+  });
 
-  else if (apple.y < head.y && dy !== 1) {
-    nextDx = 0;
-    nextDy = -1;
-  }
+  rankedMoves.sort((a, b) => {
+    if (a.canReachApple !== b.canReachApple) return b.canReachApple - a.canReachApple;
+    if (a.reachable !== b.reachable) return b.reachable - a.reachable;
+    return a.distance - b.distance;
+  });
 
-  // prevent wall crash
-  const futureX = head.x + nextDx;
-  const futureY = head.y + nextDy;
-
-  if (
-    futureX < 0 ||
-    futureX >= count ||
-    futureY < 0 ||
-    futureY >= count
-  ) {
-    // emergency turn
-    if (dx !== 0) {
-      nextDx = 0;
-      nextDy = futureY < 0 ? 1 : -1;
+  const bestMove = rankedMoves.find(m => m.safe && m.canReachApple);
+  if (bestMove) {
+    nextDx = bestMove.dx;
+    nextDy = bestMove.dy;
+  } else {
+    const emergencyMove = rankedMoves.find(m => m.safe);
+    if (emergencyMove) {
+      nextDx = emergencyMove.dx;
+      nextDy = emergencyMove.dy;
     } else {
-      nextDx = futureX < 0 ? 1 : -1;
-      nextDy = 0;
+      nextDx = dx;
+      nextDy = dy;
     }
   }
 }
-
 
 function move() {
   if (autoMode) {
@@ -947,7 +984,7 @@ function move() {
   }
 
   // ignore last tail segment because it moves away
-  for (let i = 0; i < dragon.length - 1; i++) {
+  for (let i = 0; i < dragon.length - (head.x === apple.x && head.y === apple.y ? 0 : 1); i++) {
     const segment = dragon[i];
 
     if (
