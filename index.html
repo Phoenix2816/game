@@ -1101,7 +1101,7 @@ document.addEventListener('keydown', e => {
 
       let scores = JSON.parse(
         localStorage.getItem(
-          'dragonLeaderboard'
+          'dragonLeaderboard2'
         ) || '[]'
       );
 
@@ -1127,7 +1127,7 @@ document.addEventListener('keydown', e => {
         .slice(0, 10);
 
       localStorage.setItem(
-        'dragonLeaderboard',
+        'dragonLeaderboard2',
         JSON.stringify(scores)
       );
 
@@ -1137,7 +1137,7 @@ document.addEventListener('keydown', e => {
     function renderLeaderboard() {
       let scores = JSON.parse(
         localStorage.getItem(
-          'dragonLeaderboard'
+          'dragonLeaderboard2'
         ) || '[]'
       );
 
