@@ -1104,7 +1104,7 @@ document.addEventListener('keydown', e => {
 
       let scores = JSON.parse(
         localStorage.getItem(
-          'dragonLeaderboard2'
+          'dragonLeaderboard3'
         ) || '[]'
       );
 
@@ -1130,7 +1130,7 @@ document.addEventListener('keydown', e => {
         .slice(0, 10);
 
       localStorage.setItem(
-        'dragonLeaderboard2',
+        'dragonLeaderboard3',
         JSON.stringify(scores)
       );
 
@@ -1140,7 +1140,7 @@ document.addEventListener('keydown', e => {
     function renderLeaderboard() {
       let scores = JSON.parse(
         localStorage.getItem(
-          'dragonLeaderboard2'
+          'dragonLeaderboard3'
         ) || '[]'
       );
 
@@ -1181,7 +1181,30 @@ document.addEventListener('keydown', e => {
           })
           .join('');
     }
+    // Add default legendary score once
+    if (!localStorage.getItem('dragonDefaultScore')) {
 
+      let scores = JSON.parse(
+        localStorage.getItem('dragonLeaderboard3') || '[]'
+      );
+
+      scores.push({
+        name: 'Phoenix',
+        score: 189
+      });
+
+      scores.sort((a, b) => b.score - a.score);
+
+      localStorage.setItem(
+        'dragonLeaderboard3',
+        JSON.stringify(scores)
+      );
+
+      localStorage.setItem(
+        'dragonDefaultScore',
+        'true'
+      );
+    }
     renderLeaderboard();
 
     spawnApple();
