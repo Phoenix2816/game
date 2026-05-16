@@ -530,7 +530,8 @@
   let visualHeadY = dragon[0].y;
 
   let lastMoveTime = 0;
-  const moveDelay = 110;
+  let autoMode = false;
+  const moveDelay = 75;
   let directionLocked = false;
   let gameStarted = false;
 
@@ -559,44 +560,47 @@
       }
     }
 
-    function drawApple() {
-      const x = apple.x * grid;
-      const y = apple.y * grid;
+function drawApple() {
+  const x = apple.x * grid;
+  const y = apple.y * grid;
 
-      ctx.shadowColor = '#ff0000';
-      ctx.shadowBlur = 15;
+  // glow
+  ctx.shadowColor = "#ffd166";
+  ctx.shadowBlur = 18;
 
-      ctx.fillStyle = '#d90429';
+  // beer glass
+  ctx.fillStyle = "#f4a261";
 
-      ctx.beginPath();
-      ctx.arc(x + 12, y + 14, 8, 0, Math.PI * 2);
-      ctx.fill();
+  ctx.beginPath();
+  ctx.roundRect(x + 6, y + 6, 12, 14, 3);
+  ctx.fill();
 
-      ctx.shadowBlur = 0;
+  // foam
+  ctx.shadowBlur = 0;
 
-      ctx.strokeStyle = '#4d2c13';
-      ctx.lineWidth = 2;
+  ctx.fillStyle = "#fff8e7";
 
-      ctx.beginPath();
-      ctx.moveTo(x + 12, y + 8);
-      ctx.lineTo(x + 12, y + 2);
-      ctx.stroke();
+  ctx.beginPath();
+  ctx.arc(x + 8, y + 7, 3, 0, Math.PI * 2);
+  ctx.arc(x + 12, y + 5, 4, 0, Math.PI * 2);
+  ctx.arc(x + 16, y + 7, 3, 0, Math.PI * 2);
+  ctx.fill();
 
-      ctx.fillStyle = '#6cc551';
+  // handle
+  ctx.strokeStyle = "#ffe8a3";
+  ctx.lineWidth = 2;
 
-      ctx.beginPath();
-      ctx.ellipse(
-        x + 16,
-        y + 4,
-        4,
-        2,
-        0.5,
-        0,
-        Math.PI * 2
-      );
+  ctx.beginPath();
+  ctx.arc(x + 18, y + 13, 4, -1.2, 1.2);
+  ctx.stroke();
 
-      ctx.fill();
-    }
+  // shine
+  ctx.fillStyle = "rgba(255,255,255,0.4)";
+  ctx.fillRect(x + 9, y + 9, 2, 8);
+}
+
+
+
 function drawDragonPart(part, index) {
   let renderX = part.x;
   let renderY = part.y;
@@ -867,7 +871,57 @@ function drawDragon() {
         }
       }
     }
+
+    function autoPlay() {
+  const head = dragon[0];
+
+  // move toward beer
+  if (apple.x > head.x && dx !== -1) {
+    nextDx = 1;
+    nextDy = 0;
+  }
+
+  else if (apple.x < head.x && dx !== 1) {
+    nextDx = -1;
+    nextDy = 0;
+  }
+
+  else if (apple.y > head.y && dy !== -1) {
+    nextDx = 0;
+    nextDy = 1;
+  }
+
+  else if (apple.y < head.y && dy !== 1) {
+    nextDx = 0;
+    nextDy = -1;
+  }
+
+  // prevent wall crash
+  const futureX = head.x + nextDx;
+  const futureY = head.y + nextDy;
+
+  if (
+    futureX < 0 ||
+    futureX >= count ||
+    futureY < 0 ||
+    futureY >= count
+  ) {
+    // emergency turn
+    if (dx !== 0) {
+      nextDx = 0;
+      nextDy = futureY < 0 ? 1 : -1;
+    } else {
+      nextDx = futureX < 0 ? 1 : -1;
+      nextDy = 0;
+    }
+  }
+}
+
+
 function move() {
+  if (autoMode) {
+    autoPlay();
+  }
   if (!gameStarted) return;
 
   dx = nextDx;
@@ -947,6 +1001,13 @@ function gameLoop(timestamp = 0) {
 let scoreSaved = false;
 
 function endGame() {
+
+  // AUTO MODE = INSTANT RESTART
+  if (autoMode) {
+    restartGame(true);
+    return;
+  }
+
   running = false;
 
   overlay.style.display = 'flex';
@@ -988,8 +1049,11 @@ function saveCurrentScore() {
   }
 }
 
-function restartGame() {
-  saveCurrentScore();
+function restartGame(autoRestart = false) {
+
+  if (!autoRestart) {
+    saveCurrentScore();
+  }
 
   const input =
     document.getElementById(
@@ -1004,16 +1068,20 @@ function restartGame() {
     { x: 8, y: 10 }
   ];
 
-  dx = 0;
+  dx = 1;
   dy = 0;
+
+  nextDx = 1;
+  nextDy = 0;
+
   visualHeadX = 10;
   visualHeadY = 10;
-  nextDx = 0;
-  nextDy = 0;
+
   lastMoveTime = 0;
 
   directionLocked = false;
-  gameStarted = false;
+
+  gameStarted = true;
 
   score = 0;
 
@@ -1025,6 +1093,8 @@ function restartGame() {
 
   spawnApple();
 }
+
+
 function setDirection(dir) {
   // Prevent multiple inputs in same frame
   if (directionLocked) return;
@@ -1073,28 +1143,57 @@ function setDirection(dir) {
 
 
 document.addEventListener('keydown', e => {
-  switch (e.key) {
-    case 'ArrowUp':
+  // AUTO MODE TOGGLE
+  if (
+    e.key === '0' ||
+    e.code === 'Digit0' ||
+    e.code === 'Numpad0'
+  ) {
+
+    autoMode = !autoMode;
+
+    console.log(
+      `Auto Mode: ${
+        autoMode ? 'ON' : 'OFF'
+      }`
+    );
+
+    if (autoMode) {
+
+      restartGame(true);
+
+    }
+
+    return;
+  }
+
+  switch (e.key.toLowerCase()) {
+
+    case 'arrowup':
     case 'w':
       setDirection('up');
       break;
 
-    case 'ArrowDown':
+    case 'arrowdown':
     case 's':
       setDirection('down');
       break;
 
-    case 'ArrowLeft':
+    case 'arrowleft':
     case 'a':
       setDirection('left');
       break;
 
-    case 'ArrowRight':
+    case 'arrowright':
     case 'd':
       setDirection('right');
       break;
   }
 });
+
+
+
+
 
     function saveLeaderboard(
       name,
