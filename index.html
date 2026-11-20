@@ -4,37 +4,333 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101c20">
+  <meta name="game-build" content="welsh-dragon-play-v3">
   <meta name="description" content="Guide a little Welsh dragon through an enchanted grove. Collect golden tankards, grow your legend and chase your personal best.">
-  <title>Welsh Dragon · The Ember Grove</title>
+  <title>Welsh Dragon</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23101c20'/%3E%3Cpath d='M14 43 20 22 16 12 31 21 43 16 41 28 53 35 47 47 33 49 32 38 24 45Z' fill='%23e47b55'/%3E%3Ccircle cx='37' cy='29' r='3' fill='%23ffe2a2'/%3E%3C/svg%3E">
-  <style>:root{color-scheme:dark;--bg:#101c20;--panel:#15262b;--ink:#f0eee4;--muted:#a2b3b2;--dim:#708a89;--line:rgba(178,203,192,.15);--gold:#e4bd7a;--coral:#e78561;--sage:#95b4a1;--serif:Georgia,'Times New Roman',serif;--sans:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 17% 36%,#193236 0,transparent 47%),radial-gradient(ellipse at 87% 80%,#182c2d 0,transparent 38%),var(--bg);color:var(--ink);font:16px/1.5 var(--sans);min-width:300px}button,input,select{font:inherit}button{cursor:pointer}button,select,input{-webkit-tap-highlight-color:transparent}button:disabled{cursor:default;opacity:.35}button:focus-visible,input:focus-visible,select:focus-visible,canvas:focus-visible{outline:2px solid var(--gold);outline-offset:4px}button{touch-action:manipulation}svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}.symbol-library{position:absolute;width:0;height:0;overflow:hidden}[hidden]{display:none!important}h1,h2,h3,p{margin:0}h1,h2,h3{font-weight:400}button{color:inherit}strong{font-weight:600}.app{width:min(1216px,100%);margin:auto;padding:28px 36px 0}.masthead{display:flex;justify-content:space-between;align-items:center;padding-bottom:25px;border-bottom:1px solid var(--line);gap:20px}.brand{display:flex;align-items:center;gap:14px;font-size:17px;letter-spacing:.16em;font-weight:650;white-space:nowrap}.brand small{display:block;color:var(--dim);font-size:10px;letter-spacing:.18em;margin-top:3px;font-weight:500}.brand-seal{width:51px;height:51px;display:grid;place-items:center;border:1px solid rgba(231,133,97,.28);border-radius:15px;color:var(--coral);background:linear-gradient(145deg,rgba(231,133,97,.09),rgba(231,133,97,.01));transform:rotate(-3deg)}.brand-seal svg{width:37px;height:37px;transform:rotate(3deg)}.header-actions{display:flex;gap:8px}.icon-button{display:grid;place-items:center;border:1px solid var(--line);width:41px;height:41px;border-radius:12px;background:rgba(255,255,255,.025);color:var(--muted);transition:background .18s,color .18s}.icon-button:hover{background:rgba(228,189,122,.08);color:var(--gold)}.icon-button[aria-pressed=true]{color:var(--gold);border-color:rgba(228,189,122,.35)}.workspace{display:grid;grid-template-columns:minmax(0,800px) 265px;gap:30px;padding:32px 0 0}.play-column{min-width:0}.game-heading{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:0 2px 21px}.eyebrow{color:var(--gold);font-size:10px;font-weight:600;letter-spacing:.18em;line-height:1.6}.game-heading h1{font-family:var(--serif);font-size:clamp(27px,3.2vw,39px);line-height:1.22;margin-top:6px;letter-spacing:-.025em}.state-label{color:var(--sage);border:1px solid rgba(149,180,161,.2);border-radius:30px;padding:6px 11px;white-space:nowrap;font-size:11px;letter-spacing:.025em}.state-label[data-state=playing]{background:rgba(149,180,161,.07)}.state-label[data-state=over]{color:var(--coral);border-color:rgba(231,133,97,.22)}.arena-frame{padding:0 10px;background:#12262a;border:1px solid rgba(176,199,186,.22);border-radius:20px;box-shadow:0 24px 60px #0003,0 2px 5px #0002;overflow:hidden}.score-strip{height:78px;display:flex;align-items:center;gap:37px;padding:0 13px}.score-stat{display:flex;align-items:center;gap:12px}.score-stat svg{color:var(--dim);width:23px;height:23px}.score-stat small{display:block;font-size:9px;letter-spacing:.12em;color:var(--muted);line-height:1.7}.score-stat strong{display:block;font-size:26px;font-weight:500;font-variant-numeric:tabular-nums;line-height:1.1}.primary-stat svg{color:var(--gold)}.primary-stat strong{color:var(--gold)}.speed-badge{margin-left:auto;font-size:11px;color:var(--muted);border-left:1px solid var(--line);padding:0 0 0 19px}.stage{position:relative;aspect-ratio:1;background:#18382f;border-radius:12px;overflow:hidden;isolation:isolate}.stage canvas{display:block;width:100%;height:100%;touch-action:none;outline-offset:-4px}.scene-label{position:absolute;top:3.3%;left:3.8%;display:flex;align-items:center;gap:7px;font-size:8px;font-weight:650;letter-spacing:.17em;color:#f3e6c3b3;pointer-events:none;text-shadow:0 1px 4px #000}.scene-dot{width:4px;height:4px;transform:rotate(45deg);background:#ddc68c}.overlay{position:absolute;inset:0;display:flex;pointer-events:none}.ready-overlay{align-items:flex-end;justify-content:center;padding:0 6% 5%}.start-panel{pointer-events:auto;width:min(410px,100%);text-align:center;padding:24px 20px 20px;border:1px solid rgba(218,203,159,.2);border-radius:17px;background:linear-gradient(145deg,rgba(17,37,36,.97),rgba(13,29,30,.96));box-shadow:0 14px 45px #07191466;backdrop-filter:blur(10px)}.start-panel .eyebrow{font-size:8px;letter-spacing:.16em}.start-panel h2{font:33px/1.25 var(--serif);letter-spacing:-.025em;margin-top:8px}.start-panel>p:not(.eyebrow){color:#b3c5bb;font-size:13px;line-height:1.7;margin-top:9px}.start-actions{display:flex;gap:9px;align-items:center;justify-content:center;margin-top:19px}.button{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:43px;padding:10px 16px;border-radius:9px;border:1px solid transparent;font-size:13px;font-weight:600;white-space:nowrap;transition:filter .18s,transform .18s,background .18s}.button svg{width:17px;height:17px}.button:hover:not(:disabled){filter:brightness(1.08)}.button:active:not(:disabled){transform:translateY(1px)}.primary{color:#26302a;background:linear-gradient(135deg,#edcd92,#d9ac65);box-shadow:0 5px 17px #0002,inset 0 1px 0 #ffffff33}.quiet{background:rgba(230,224,192,.035);color:#c0cbbc;border-color:rgba(230,224,192,.15)}.start-hint{display:block;font-size:10px;color:#93aaa0;letter-spacing:.03em;margin-top:14px}.start-hint span{padding:0 6px;color:#c2b287}.arena-toolbar{min-height:56px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 9px}.toolbar-actions{display:flex;gap:22px}.toolbar-button{display:flex;align-items:center;gap:7px;background:none;border:0;padding:5px 0;color:#acbfba;font-size:12px;min-height:34px}.toolbar-button:hover:not(:disabled){color:var(--gold)}.toolbar-button svg{width:16px;height:16px}.toolbar-hint{font-size:10px;color:var(--dim)}kbd{font:9px/1 var(--sans);border:1px solid #73948d3b;border-bottom-width:2px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;height:21px;min-width:20px;padding:2px 4px;color:#a9c0b4;background:#ffffff03}.toolbar-hint kbd{margin-right:4px;font-size:8px}.below-arena{display:flex;align-items:center;justify-content:space-between;padding:14px 3px;color:var(--dim);font-size:11px;gap:10px}.keyboard-note{display:flex;align-items:center;gap:9px}.key-cluster{display:flex;gap:3px}.length-note strong{color:var(--muted);font-size:13px;margin-left:5px;font-weight:500;font-variant-numeric:tabular-nums}.sidebar{padding-top:7px}.sidebar h2{font:25px/1.25 var(--serif);letter-spacing:-.015em}.section-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}.section-title svg{color:var(--gold);width:19px;height:19px}.section-subtitle{color:var(--muted);font-size:12px;margin-top:8px}.leaderboard-panel{padding:18px 20px 17px;background:linear-gradient(145deg,rgba(221,226,190,.045),rgba(156,185,163,.012));border:1px solid var(--line);border-radius:15px}.score-filter{width:100%;margin-top:17px;padding:8px 30px 8px 10px;font-size:11px;background:#12292b;border:1px solid var(--line);border-radius:7px;color:var(--muted);appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6' fill='none' stroke='%2398aaa3' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center}.leaderboard{list-style:none;padding:0;margin:9px 0;max-height:285px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#607e6e44 transparent}.leaderboard:empty{display:none}.leaderboard li{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--line);min-width:0}.leaderboard li:last-child{border:0}.rank{font:13px var(--serif);color:var(--dim);width:18px;text-align:center}.leaderboard li:first-child .rank{color:var(--gold)}.rank-name{min-width:0;flex:1}.rank-name strong{font-size:12px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:500}.rank-name small{display:block;font-size:10px;color:var(--dim);margin-top:1px}.rank-score{font-size:17px;color:var(--gold);font-variant-numeric:tabular-nums}.empty-scores{text-align:center;padding:24px 0 20px}.empty-crown{display:grid;place-items:center;width:46px;height:46px;margin:0 auto 13px;background:#d6b67509;border:1px solid #d6b67525;border-radius:50%;color:#d6b675;position:relative}.empty-crown:before,.empty-crown:after{content:'';position:absolute;width:23px;height:1px;background:#d6b67522;top:22px}.empty-crown:before{right:55px}.empty-crown:after{left:55px}.empty-crown svg{width:23px;height:23px}.empty-scores h3{font:14px var(--serif);color:#d6dfd0}.empty-scores p{font-size:11px;color:var(--dim);line-height:1.8;margin-top:8px}.local-note{text-align:center;font-size:10px;color:var(--dim);border-top:1px solid var(--line);padding-top:13px}.how-panel{padding:29px 3px 6px}.how-panel h2{font-size:22px;margin-top:7px;margin-bottom:19px}.rule{display:flex;gap:12px;margin-top:17px}.rule-icon{width:31px;height:31px;display:grid;place-items:center;border:1px solid var(--line);border-radius:9px;background:#ffffff02;flex-shrink:0}.rule-icon svg{width:17px;height:17px}.rule-icon.gold{color:var(--gold)}.rule-icon.coral{color:var(--coral)}.rule-icon.sage{color:var(--sage)}.rule strong{display:block;font-size:12px;font-weight:500;line-height:1.3;margin:1px 0 5px}.rule p>span{display:block;font-size:11px;line-height:1.65;color:var(--muted)}.scene-panel{padding:25px 3px 0}.scene-options{display:flex;gap:9px;margin-top:12px}.scene-option{flex:1;min-width:0;padding:0;border:0;background:none;text-align:center;font-size:10px;color:var(--muted)}.scene-option>span:last-child{display:block;margin-top:7px}.scene-option.active{color:var(--gold)}.scene-preview{position:relative;display:block;aspect-ratio:1.25;border:1px solid var(--line);border-radius:9px;overflow:hidden;box-shadow:inset 0 0 18px #0003}.scene-option.active .scene-preview{border:1px solid var(--gold);outline:2px solid #e4bd7a18;outline-offset:2px}.grove-preview{background:radial-gradient(circle at 70% 28%,#d6c584 0,transparent 38%),linear-gradient(160deg,#455d38,#193c33)}.dusk-preview{background:radial-gradient(circle at 70% 28%,#dab48a 0,transparent 29%),linear-gradient(150deg,#655c72,#293541)}.frost-preview{background:radial-gradient(circle at 70% 28%,#dce7dd 0,transparent 36%),linear-gradient(160deg,#6795a3,#345966)}.scene-preview:after{content:'';position:absolute;bottom:-23%;left:12%;width:100%;height:70%;border-radius:40%;transform:rotate(-12deg);background:#0b2a2c88}.scene-preview i,.scene-preview b{position:absolute;background:#153d32;bottom:5%;width:17%;height:65%;clip-path:polygon(50% 0,85% 35%,70% 35%,100% 65%,75% 65%,95% 90%,60% 90%,60% 100%,40% 100%,40% 90%,5% 90%,25% 65%,0 65%,30% 35%,15% 35%)}.scene-preview i{left:17%}.scene-preview b{right:10%;height:45%}.dusk-preview i,.dusk-preview b{background:#2d2d42}.frost-preview i,.frost-preview b{background:#b9d1ce}.scene-note{margin-top:12px;color:var(--dim);font-size:10px;line-height:1.6}.footer{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:13px;padding:20px 0 25px;border-top:1px solid var(--line);font-size:10px;letter-spacing:.04em;color:var(--dim)}.footer i{font-style:normal;padding:0 8px}.text-button{border:0;background:none;color:var(--muted);font-size:11px;padding:5px 0;display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:32px}.text-button:hover{color:var(--gold)}.text-button svg{width:15px;height:15px}.center-overlay{align-items:center;justify-content:center;background:#0919168c;backdrop-filter:blur(4px);padding:20px}.state-panel{pointer-events:auto;width:min(355px,100%);text-align:center;padding:25px 25px 18px;border:1px solid #d9c28b33;background:linear-gradient(150deg,#1a3332,#12262a);border-radius:17px;box-shadow:0 15px 50px #0005}.state-panel h2{font:29px/1.2 var(--serif);margin-top:8px;letter-spacing:-.02em}.state-panel>p:not(.eyebrow):not(.new-best){font-size:12px;line-height:1.65;color:var(--muted);margin-top:10px}.panel-symbol{display:grid;place-items:center;color:var(--gold);margin:0 auto 11px}.panel-symbol svg{width:30px;height:30px}.state-panel>.button{width:100%;margin-top:19px}.state-panel .eyebrow{font-size:9px}.result-score{padding:15px 0 8px;display:flex;align-items:center;flex-direction:column}.result-score strong{font:53px/1 var(--serif);color:var(--gold)}.result-score span{color:var(--muted);font-size:11px;margin-top:4px}.new-best{font-size:11px;color:var(--gold);padding:4px 0}.score-form{margin-top:13px;text-align:left}.score-form label{font-size:10px;color:var(--muted);display:block;margin-bottom:7px}.name-row{display:flex;gap:7px}.name-row input{min-width:0;flex:1;width:100%;font-size:12px;padding:10px 11px;border:1px solid var(--line);border-radius:7px;background:#0a202566;color:var(--ink)}.name-row input::placeholder{color:var(--dim)}.save-button{color:var(--gold);background:#e4bd7a0c;border-color:#e4bd7a35;min-height:38px;padding:8px 12px}.save-status{min-height:16px;font-size:10px;color:var(--sage);margin-top:5px}.result-panel>.button{margin-top:11px}.result-panel .text-button{margin-top:5px;font-size:10px}.demo-tag{position:absolute;top:3%;right:3%;background:#10292ddc;border:1px solid #d9bb7d3b;color:var(--gold);padding:5px 9px;border-radius:7px;font-size:9px;letter-spacing:.12em}.demo-tag span{display:block;color:var(--muted);letter-spacing:0;font-size:8px}.collect-toast{position:absolute;left:50%;top:8%;transform:translate(-50%,-6px);color:var(--gold);font-size:13px;background:#102621e8;padding:8px 14px;border:1px solid #c7b37d35;border-radius:30px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;white-space:nowrap}.collect-toast.visible{opacity:1;transform:translate(-50%,0)}.touch-controls{display:none}.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}dialog{color:var(--ink);border:1px solid #8ca58f50;border-radius:20px;background:linear-gradient(150deg,#1b3336,#11262b);padding:25px;max-width:450px;width:calc(100% - 30px);max-height:calc(100dvh - 35px);box-shadow:0 30px 100px #0008;overflow:auto}dialog::backdrop{background:#06171bd1;backdrop-filter:blur(6px)}.dialog-heading{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:23px}.dialog-heading h2{font:30px var(--serif);margin-top:4px}.dialog-heading .eyebrow{font-size:9px}.dialog-heading .icon-button{width:35px;height:35px;flex-shrink:0}.dialog-description{font-size:12px;color:var(--muted);line-height:1.7;margin:7px 0 13px}fieldset{padding:0;border:0;margin:0}legend{padding:0;font-size:14px}.pace-options{display:flex;flex-direction:column;gap:8px}.pace-options label{display:flex;align-items:center;gap:12px;padding:11px 12px;border:1px solid var(--line);border-radius:10px;cursor:pointer}.pace-options label:has(input:checked){border-color:#e4bd7a66;background:#e4bd7a07}.pace-options input{accent-color:var(--gold);width:15px;height:15px}.pace-options strong{display:block;font-size:13px;font-weight:500}.pace-options small{display:block;font-size:11px;color:var(--muted);margin-top:2px}.setting-row{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}.setting-row label strong{display:block;font-size:13px;font-weight:500}.setting-row label span{display:block;font-size:11px;color:var(--muted);margin-top:3px}.switch{appearance:none;width:35px;height:21px;border-radius:12px;background:#081e22;border:1px solid #94ae8f40;position:relative;flex-shrink:0;cursor:pointer;transition:background .2s}.switch:before{content:'';position:absolute;width:13px;height:13px;left:3px;top:3px;background:#8ca59b;border-radius:50%;transition:transform .2s}.switch:checked{background:#ba9d5f;border-color:#ba9d5f}.switch:checked:before{background:#17282a;transform:translateX(14px)}.dialog-done{width:100%;margin-top:24px}.help-copy{font-size:13px;line-height:1.8;color:var(--muted)}.help-copy p+p{margin-top:12px}.help-copy strong{color:var(--ink)}.help-copy dl{margin:19px 0}.help-copy dl>div{display:grid;grid-template-columns:70px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}.help-copy dt{color:var(--gold)}.help-copy dd{margin:0}body.reduced-motion *,body.reduced-motion *:before,body.reduced-motion *:after{animation:none!important;transition:none!important}.app:fullscreen{overflow:auto;width:100%;max-width:none;background:var(--bg);padding:24px max(24px,calc((100% - 1144px)/2))}
-@media(min-width:1450px){.app{width:1280px;padding-top:34px}.workspace{grid-template-columns:minmax(0,1fr) 280px;gap:36px}.sidebar{padding-top:10px}.game-heading{padding-bottom:25px}.sidebar h2{font-size:27px}.how-panel{padding-top:35px}.rule p>span{font-size:12px}.rule strong{font-size:13px}}
-@media(max-width:1050px){.app{padding:22px 24px 0}.workspace{grid-template-columns:minmax(0,1fr) 235px;gap:22px}.leaderboard-panel{padding:16px}.start-panel{padding:18px 14px 16px}.start-panel h2{font-size:28px}.start-actions{gap:6px;margin-top:14px}.start-actions .button{padding:9px 12px;font-size:11px;min-height:38px}.start-hint{font-size:9px;margin-top:11px}.start-panel>p:not(.eyebrow){font-size:12px}.state-label{font-size:10px;padding:5px 9px}.scene-note{font-size:9px}.score-strip{gap:26px;height:72px}.score-stat small{font-size:8px}.score-stat strong{font-size:24px}.score-stat{gap:9px}.result-panel{padding:18px}.result-panel h2{font-size:25px}.result-score{padding:10px 0 5px}.result-score strong{font-size:42px}.result-panel .panel-symbol{display:none}.result-panel .score-form{margin-top:8px}}
-@media(max-width:800px){.app{max-width:700px;padding:18px 20px 0}.masthead{padding-bottom:20px}.workspace{grid-template-columns:minmax(0,1fr);gap:18px;padding-top:24px}.game-heading h1{font-size:34px}.sidebar{display:grid;grid-template-columns:1fr 1fr;column-gap:24px;row-gap:23px;padding-top:0;align-items:start}.leaderboard-panel{grid-row:span 2}.how-panel{padding:6px 0 0}.scene-panel{padding:0}.scene-note{font-size:10px}.game-heading{padding-bottom:20px}.start-panel{padding:22px 20px 20px}.start-panel h2{font-size:33px}.start-panel>p:not(.eyebrow){font-size:13px}.start-actions{margin-top:17px}.start-actions .button{font-size:13px;min-height:43px;padding:10px 16px}.start-hint{font-size:10px;margin-top:13px}.touch-controls{display:flex;justify-content:space-between;align-items:center;padding:2px 4px 8px}.touch-controls>p{font-size:12px;color:var(--muted);line-height:1.7}.touch-controls>p span{font-size:11px;color:var(--dim)}.dpad{display:grid;grid-template-columns:44px 44px 44px;grid-template-rows:40px 40px 40px;gap:4px}.dpad button{display:grid;place-items:center;border:1px solid #9ab5a72b;background:#1c3337;border-radius:9px;touch-action:none}.dpad button:active{background:#d4b87b;color:#16302d}.dpad svg{width:21px;height:21px}.dir-up{grid-area:1/2}.dir-left{grid-area:2/1}.dir-left svg{transform:rotate(-90deg)}.dir-right{grid-area:2/3}.dir-right svg{transform:rotate(90deg)}.dir-down{grid-area:3/2}.dir-down svg{transform:rotate(180deg)}.dpad-center{grid-area:2/2;display:grid;place-items:center;color:#90a58a55}.dpad-center svg{width:26px;height:26px}.keyboard-note{display:none}.below-arena{justify-content:flex-end;padding-bottom:0}.footer{margin-top:28px}.result-panel{padding:25px}.result-panel .panel-symbol{display:grid}.result-panel h2{font-size:29px}.result-score strong{font-size:48px}}
-@media(max-width:480px){.app{padding:15px 12px 0}.masthead{gap:8px;padding:0 3px 17px}.brand{gap:9px;font-size:12px;letter-spacing:.13em}.brand small{font-size:7px;letter-spacing:.12em;margin-top:4px}.brand-seal{width:39px;height:39px;border-radius:11px}.brand-seal svg{width:30px;height:30px}.header-actions{gap:5px}.header-actions .icon-button{width:33px;height:33px;border-radius:10px}.header-actions .icon-button svg{width:17px;height:17px}.fullscreen-button{display:none}.workspace{padding-top:21px}.game-heading{padding:0 4px 17px;gap:8px}.game-heading h1{font-size:28px;margin-top:5px}.game-heading .eyebrow{font-size:8px}.state-label{font-size:9px;padding:5px 8px}.arena-frame{padding:0 6px;border-radius:16px}.score-strip{height:66px;padding:0 9px;gap:25px}.score-stat{gap:8px}.score-stat svg{width:18px;height:18px}.score-stat small{font-size:7px;letter-spacing:.08em}.score-stat strong{font-size:24px}.speed-badge{font-size:9px;padding-left:11px}.stage{border-radius:10px}.scene-label{font-size:6px}.ready-overlay{padding:0 8% 4%}.start-panel{padding:12px 12px 13px;border-radius:12px}.start-panel .eyebrow{font-size:6px;letter-spacing:.1em}.start-panel h2{font-size:25px;margin-top:5px}.start-panel>p:not(.eyebrow){font-size:11px;line-height:1.5;margin-top:6px}.start-actions{margin-top:12px;gap:7px}.start-actions .button{font-size:10px;min-height:38px;padding:8px 10px;border-radius:7px;gap:6px}.start-actions svg{width:14px;height:14px}.start-hint{font-size:8px;margin-top:9px}.arena-toolbar{min-height:48px;padding:4px 7px}.toolbar-actions{gap:20px}.toolbar-button{font-size:10px;gap:6px}.toolbar-button svg{width:14px;height:14px}.toolbar-hint{font-size:8px}.toolbar-hint kbd{height:18px;font-size:7px}.below-arena{font-size:10px;padding:10px 4px 0}.touch-controls{padding:0 9px 10px}.touch-controls>p{font-size:11px}.touch-controls>p span{font-size:10px}.sidebar{gap:19px 16px}.leaderboard-panel{padding:15px 12px;grid-row:span 1}.sidebar h2{font-size:24px}.section-title .eyebrow,.how-panel>.eyebrow,.scene-panel>.eyebrow{font-size:8px;letter-spacing:.12em}.section-subtitle{font-size:10px}.empty-scores{padding:19px 0 17px}.empty-scores h3{font-size:13px;line-height:1.5}.empty-scores p{font-size:10px}.local-note{font-size:9px;line-height:1.6}.how-panel h2{font-size:21px;margin-bottom:16px}.rule{gap:8px;margin-top:15px}.rule-icon{width:25px;height:25px;border-radius:7px}.rule-icon svg{width:14px;height:14px}.rule strong{font-size:10px}.rule p>span{font-size:10px;line-height:1.7}.scene-panel{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;column-gap:20px;align-items:center;padding:15px 2px 0;border-top:1px solid var(--line)}.scene-panel>.eyebrow{grid-area:1/1;align-self:end}.scene-note{grid-area:2/1;align-self:start;margin-top:6px;font-size:10px}.scene-options{grid-area:1/2/3/3;margin:0;gap:8px}.scene-option{font-size:9px}.scene-preview{border-radius:7px;aspect-ratio:1.2}.footer{font-size:8px;margin-top:22px;padding:17px 2px 21px}.footer i{padding:0 3px}.footer .text-button{font-size:9px;gap:4px}.footer svg{width:13px;height:13px}.center-overlay{padding:12px}.state-panel{padding:17px 17px 13px;max-width:280px;border-radius:12px}.state-panel .panel-symbol{display:none}.state-panel h2{font-size:25px}.state-panel>.eyebrow{font-size:7px}.state-panel>p:not(.eyebrow):not(.new-best){font-size:10px;margin-top:7px}.state-panel .button{font-size:11px;min-height:38px}.result-score{padding:9px 0 3px}.result-score strong{font-size:37px}.result-score span{font-size:9px}.new-best{font-size:9px;padding:1px}.score-form{margin-top:7px}.score-form label{font-size:8px;margin-bottom:4px}.name-row input{font-size:11px;padding:8px 10px}.save-status{font-size:8px;min-height:11px;margin-top:3px}.result-panel>.button{margin-top:7px}.result-panel .text-button{min-height:23px;font-size:9px;margin-top:1px}.result-panel .save-button{min-height:34px;font-size:10px;padding:7px 10px}.demo-tag{font-size:7px}.demo-tag span{font-size:6px}.collect-toast{font-size:10px;padding:6px 10px}.rank-name strong{font-size:10px}.rank-name small{font-size:8px}.rank-score{font-size:15px}.leaderboard li{gap:7px}.rank{width:12px;font-size:11px}}
-@media(pointer:coarse) and (min-width:801px){.touch-controls{display:flex;align-items:center;justify-content:space-between;padding:4px 0 14px}.touch-controls>p{font-size:12px;color:var(--muted)}.touch-controls>p span{color:var(--dim)}.dpad{display:grid;grid-template-columns:44px 44px 44px;grid-template-rows:40px 40px 40px;gap:4px}.dpad button{display:grid;place-items:center;border:1px solid var(--line);background:#1c3337;border-radius:8px}.dir-up{grid-area:1/2}.dir-left{grid-area:2/1}.dir-left svg{transform:rotate(-90deg)}.dir-right{grid-area:2/3}.dir-right svg{transform:rotate(90deg)}.dir-down{grid-area:3/2}.dir-down svg{transform:rotate(180deg)}.dpad-center{grid-area:2/2;display:grid;place-items:center;color:var(--dim)}}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
-
-/* Keep the whole arena in view on desktop, with comfortably readable controls. */
-@media(min-width:801px){
- .app{width:min(1180px,max(910px,calc(100dvh - 36px)));padding:20px 24px 0}
- .masthead{padding-bottom:16px}.workspace{grid-template-columns:minmax(0,1fr) 260px;gap:26px;padding-top:20px}
- .game-heading{padding-bottom:16px}.game-heading h1{font-size:32px;line-height:1.15;margin-top:4px}.game-heading .eyebrow{font-size:10px}
- .score-strip{height:64px;gap:27px;padding:0 10px}.score-stat strong{font-size:25px}.score-stat small{font-size:10px;letter-spacing:.06em}.score-stat{gap:9px}.speed-badge{font-size:12px}
- .arena-toolbar{min-height:48px}.below-arena{padding:9px 3px;font-size:12px}.footer{margin-top:8px;padding:13px 0 16px;font-size:11px}
- .sidebar{padding-top:3px}.leaderboard-panel{padding:16px 18px}.section-subtitle,.score-filter,.empty-scores p,.local-note{font-size:12px}.empty-scores h3{font-size:16px}.empty-scores{padding:17px 0}.empty-crown{margin-bottom:10px}
- .how-panel{padding-top:23px}.how-panel h2{font-size:23px}.rule strong{font-size:14px}.rule p>span{font-size:12px;line-height:1.6}.rule{margin-top:16px}.scene-panel{padding-top:22px}.scene-option,.scene-note{font-size:12px}
- .start-panel h2{font-size:30px}.start-panel>p:not(.eyebrow){font-size:14px}.start-panel{padding:19px 18px 16px}.start-panel .eyebrow{font-size:9px}.start-actions .button{font-size:13px;min-height:42px;padding:10px 13px}.start-hint{font-size:11px}
+  <style>:root {
+  color-scheme: dark;
+  --bg: #101c20;
+  --panel: #14282c;
+  --ink: #f0eee4;
+  --muted: #acbeb8;
+  --dim: #819b92;
+  --line: rgba(178, 203, 192, .19);
+  --gold: #e4bd7a;
+  --coral: #e78561;
+  --sage: #a9c9af;
+  --serif: Georgia, 'Times New Roman', serif;
+  --sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
-.toolbar-button,.text-button{font-size:12px}.state-label{font-size:12px}.eyebrow{font-size:11px}.brand small{font-size:10px}.score-form label{font-size:12px}.save-status{font-size:11px}.help-copy{font-size:14px}.dialog-description{font-size:13px}.pace-options strong,.setting-row label strong{font-size:14px}.pace-options small,.setting-row label span{font-size:12px}.rank-name strong{font-size:13px}.rank-name small{font-size:11px}.name-row input{font-size:14px}.toolbar-hint{font-size:11px}.length-note{font-size:12px}
-@media(max-width:800px){.game-heading .eyebrow{font-size:11px}.section-subtitle,.score-filter,.local-note,.empty-scores p{font-size:12px}.empty-scores h3{font-size:15px}.rule strong{font-size:13px}.rule p>span{font-size:12px}.scene-note,.scene-option{font-size:12px}.start-panel>p:not(.eyebrow){font-size:14px}.score-stat small{font-size:10px;letter-spacing:.05em}.speed-badge{font-size:12px}.start-hint{font-size:11px}.touch-controls>p{font-size:13px}.touch-controls>p span{font-size:12px}.footer{font-size:11px}}
-@media(max-width:480px){.brand small{display:none}.brand{font-size:12px}.game-heading h1{font-size:27px}.game-heading .eyebrow{font-size:10px}.state-label{font-size:10px}.score-strip{gap:18px}.score-stat small{font-size:9px}.score-stat svg{width:17px}.speed-badge{font-size:11px}.ready-overlay{padding:0 5% 4%}.start-panel .eyebrow{display:none}.start-panel h2{font-size:26px;margin-top:0}.start-panel>p:not(.eyebrow){font-size:12px}.start-actions .button{font-size:12px;min-height:40px;padding:8px 10px}.start-hint{font-size:10px}.toolbar-actions{gap:15px}.toolbar-button{font-size:11px}.toolbar-hint{font-size:10px}.toolbar-hint kbd{font-size:9px}.sidebar{grid-template-columns:1fr}.leaderboard-panel{padding:18px}.section-title .eyebrow,.how-panel>.eyebrow,.scene-panel>.eyebrow{font-size:11px}.how-panel{padding:5px 4px 0}.how-panel h2{font-size:26px}.rule{margin-top:17px;gap:12px}.rule-icon{width:32px;height:32px}.rule-icon svg{width:18px;height:18px}.rule strong{font-size:14px}.rule p>span{font-size:13px}.scene-panel{padding:20px 4px 0;gap:18px}.scene-note{font-size:12px}.scene-option{font-size:11px}.footer,.footer .text-button{font-size:10px}.result-panel .score-form label{font-size:10px}.result-panel .save-status{font-size:10px}.result-panel h2{font-size:24px}.result-panel>p:not(.eyebrow):not(.new-best){font-size:11px}.result-panel .name-row input{font-size:12px}.state-panel{padding:14px}.result-panel .result-score{padding-top:8px}.result-panel .result-score strong{font-size:34px}.result-panel .result-score span{font-size:10px}}
-@media(max-width:480px){
- .start-panel>p:not(.eyebrow){display:none}.start-panel h2{font-size:24px}.start-actions{margin-top:11px}.start-actions .button{font-size:11px;padding:8px 9px}.start-hint{font-size:9px}.start-panel{padding:12px 10px}.start-actions{gap:6px}
- .center-overlay{position:fixed;inset:0;z-index:50;padding:20px;background:#071c20dc;overflow-y:auto}.state-panel{max-width:355px;padding:24px 20px}.result-panel .panel-symbol{display:grid}.state-panel h2,.result-panel h2{font-size:29px}.state-panel .eyebrow{font-size:10px}.state-panel>p:not(.eyebrow):not(.new-best),.result-panel>p:not(.eyebrow):not(.new-best){font-size:13px}.result-panel .result-score{padding:16px 0 8px}.result-panel .result-score strong{font-size:49px}.result-panel .result-score span{font-size:12px}.result-panel .score-form label{font-size:12px}.result-panel .name-row input{font-size:16px}.result-panel .save-status{font-size:11px;min-height:18px}.result-panel>.button{font-size:13px;min-height:44px;margin-top:14px}.result-panel .text-button{font-size:12px;min-height:36px}.result-panel .save-button{min-height:42px;font-size:12px}.new-best{font-size:12px}
- .dpad{grid-template-rows:44px 44px 44px}
- .state-panel{margin:auto}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-width: 300px;
+  background: radial-gradient(ellipse at 15% 35%, #193236 0, transparent 49%), var(--bg);
+  color: var(--ink);
+  font: 16px/1.5 var(--sans);
+}
+button, input, select { font: inherit; }
+button, input, select { -webkit-tap-highlight-color: transparent; }
+button { color: inherit; cursor: pointer; touch-action: manipulation; }
+button:disabled { cursor: default; opacity: .4; }
+button:focus-visible, input:focus-visible, select:focus-visible, canvas:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+[hidden] { display: none !important; }
+h1, h2, h3, p { margin: 0; }
+h1, h2, h3 { font-weight: 400; }
+strong { font-weight: 600; }
+svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.symbol-library { position: absolute; width: 0; height: 0; overflow: hidden; }
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+/* The square field and its controls fit the desktop viewport together. */
+.app {
+  --stage-size: min(944px, calc(100dvh - 170px), calc(100vw - 322px));
+  position: relative;
+  width: 100%;
+  max-width: calc(var(--stage-size) + 322px);
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 12px;
+}
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  align-items: start;
+  gap: 20px;
+}
+.play-column { min-width: 0; }
+.arena-frame {
+  padding: 0 8px;
+  border: 1px solid rgba(176, 199, 186, .24);
+  border-radius: 16px;
+  background: #12262a;
+  box-shadow: 0 16px 50px #0003;
+  overflow: hidden;
+}
+.score-strip {
+  height: 54px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 0 9px;
+}
+.score-stat { display: flex; align-items: center; gap: 9px; }
+.score-stat svg { width: 22px; height: 22px; color: var(--dim); }
+.score-stat small { display: block; color: var(--muted); font-size: 11px; line-height: 1.2; letter-spacing: .04em; }
+.score-stat strong { display: block; font-size: 25px; font-weight: 500; line-height: 1.14; font-variant-numeric: tabular-nums; }
+.primary-stat svg, .primary-stat strong { color: var(--gold); }
+.state-label { margin-left: auto; color: var(--sage); font-size: 12px; white-space: nowrap; }
+.state-label[data-state=over] { color: var(--coral); }
+.stage { position: relative; width: 100%; aspect-ratio: 1; overflow: hidden; isolation: isolate; background: #18382f; border-radius: 10px; }
+.stage canvas { display: block; width: 100%; height: 100%; touch-action: none; outline-offset: -4px; }
+.scene-label { position: absolute; top: 3.2%; left: 3.6%; display: flex; align-items: center; gap: 7px; color: #f3e6c3c9; font-size: 9px; font-weight: 600; letter-spacing: .12em; text-shadow: 0 1px 4px #000; pointer-events: none; }
+.scene-dot { width: 4px; height: 4px; background: #ddc68c; transform: rotate(45deg); }
+.arena-toolbar { display: flex; align-items: center; gap: 8px; min-height: 56px; padding: 6px 0; }
+.toolbar-actions { display: flex; align-items: center; gap: 3px; }
+.toolbar-button, .text-button { display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 0; color: var(--muted); background: none; font-size: 13px; white-space: nowrap; }
+.toolbar-button { min-height: 42px; padding: 7px; border-radius: 8px; font-size: 14px; }
+.toolbar-button svg { width: 17px; height: 17px; }
+.toolbar-button:hover:not(:disabled), .text-button:hover { color: var(--gold); background: #e4bd7a0a; }
+.toolbar-button[aria-pressed=true] { color: var(--gold); background: #e4bd7a15; }
+.text-button { min-height: 40px; padding: 7px 4px; border-radius: 7px; }
+.text-button svg { width: 18px; height: 18px; }
+.toolbar-hint { display: none; color: var(--dim); font-size: 12px; white-space: nowrap; }
+.game-actions { display: flex; align-items: center; gap: 5px; margin-left: auto; }
+.icon-button { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 1px solid var(--line); border-radius: 9px; color: var(--muted); background: #ffffff04; flex-shrink: 0; }
+.icon-button svg { width: 20px; height: 20px; }
+.icon-button:hover { color: var(--gold); background: #e4bd7a0d; }
+.icon-button[aria-pressed=true] { color: var(--gold); border-color: #e4bd7a66; }
+.stop-demo { color: var(--gold); padding: 7px 3px; font-size: 12px; }
+.arena-toolbar:has(.stop-demo:not([hidden])) #demoToggleBtn { display: none; }
+.below-arena { min-height: 34px; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 5px 3px; color: var(--dim); font-size: 12px; }
+.keyboard-note, .key-cluster { display: flex; align-items: center; gap: 6px; }
+.key-cluster { gap: 3px; }
+kbd { display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 21px; padding: 2px 4px; border: 1px solid #73948d50; border-bottom-width: 2px; border-radius: 4px; color: #b7cbbf; background: #ffffff04; font: 10px/1 var(--sans); }
+.length-note { white-space: nowrap; }
+.length-note strong { margin-left: 4px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.touch-controls { display: none; }
+/* One sidebar, one score list. Scenery changes only the field's appearance. */
+.sidebar { display: flex; flex-direction: column; gap: 16px; max-height: calc(100dvh - 76px); min-width: 0; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #607e6e66 transparent; padding-right: 3px; }
+.scene-panel { padding: 0; }
+.scene-options { display: flex; gap: 6px; }
+.scene-option { display: flex; align-items: center; justify-content: center; gap: 5px; flex: 1; min-width: 0; min-height: 44px; padding: 7px 5px; border: 1px solid var(--line); border-radius: 10px; background: #15292c; color: var(--muted); font-size: 14px; }
+.scene-option::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #82ad71; flex-shrink: 0; }
+.scene-option[data-theme=dusk]::before { background: #b39ac8; }
+.scene-option[data-theme=frost]::before { background: #acd5e3; }
+.scene-option.active { color: #ffe0a3; border-color: #e4bd7a99; background: #e4bd7a13; }
+.scene-option:hover { border-color: #e4bd7a88; }
+.scene-preview { display: none; }
+.leaderboard-panel { min-width: 0; padding: 17px; border: 1px solid var(--line); border-radius: 14px; background: linear-gradient(145deg, #dde2be0b, #9cb9a303); }
+.sidebar h2 { font: 25px/1.2 var(--serif); }
+.section-title { display: flex; justify-content: space-between; align-items: center; margin-bottom: 9px; }
+.section-title svg { width: 20px; height: 20px; color: var(--gold); }
+.eyebrow { color: var(--gold); font-size: 11px; font-weight: 600; letter-spacing: .12em; }
+.section-subtitle { margin-top: 6px; color: var(--muted); font-size: 13px; }
+.leaderboard { list-style: none; padding: 0; margin: 17px 0 10px; max-height: 304px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #607e6e66 transparent; }
+.leaderboard li { display: flex; align-items: center; gap: 9px; padding: 11px 0; border-bottom: 1px solid var(--line); min-width: 0; }
+.leaderboard li:last-child { border-bottom: 0; }
+.leaderboard .rank { width: 24px; flex-shrink: 0; color: var(--dim); font-size: 13px; text-align: center; }
+.rank-name { min-width: 0; flex: 1; }
+.rank-name strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; font-weight: 500; }
+.rank-name small { display: block; margin-top: 1px; color: var(--dim); font-size: 11px; }
+.rank-score { color: var(--gold); font-size: 18px; font-variant-numeric: tabular-nums; }
+.leaderboard .legend-entry { padding: 13px 9px; margin-bottom: 7px; border: 1px solid #ffdf9c; border-radius: 10px; background: linear-gradient(110deg, #f1cf8c, #d3a859); box-shadow: 0 4px 15px #0002; }
+.leaderboard .legend-entry .rank, .leaderboard .legend-entry .rank-name strong, .leaderboard .legend-entry .rank-score { color: #263124; font-weight: 700; }
+.leaderboard .legend-entry .rank-name small { color: #4e542f; }
+.leaderboard .legend-entry .rank-score { font-size: 24px; }
+.empty-scores { padding: 0 0 12px; text-align: center; color: var(--dim); font-size: 12px; }
+.local-note { padding-top: 11px; border-top: 1px solid var(--line); text-align: center; color: var(--dim); font-size: 12px; line-height: 1.6; }
+.link-image-frame { overflow: hidden; border: 1px solid var(--line); border-radius: 12px; background: #fff; color: #263124; flex-shrink: 0; }
+.dragon-link { display: block; width: 100%; height: auto; max-height: 240px; object-fit: contain; padding: 9px; background: #fff; }
+.dragon-link.image-unavailable { min-height: 36px; color: #263124; font-size: 13px; }
+.link-image-error { padding: 3px 12px 12px; color: #4e5d54; font-size: 12px; line-height: 1.6; }
+.link-image-error strong, .link-image-error span { display: block; }
+.link-image-error strong { color: #263124; font-size: 13px; margin-bottom: 2px; }
+.footer { position: absolute; right: 12px; bottom: 12px; width: 260px; height: 40px; display: flex; justify-content: flex-end; align-items: center; }
+.footer .text-button { color: var(--dim); font-size: 12px; }
+/* Start, pause and result cards are confined to the playing area. */
+.overlay { position: absolute; inset: 0; display: flex; pointer-events: none; }
+.ready-overlay { align-items: flex-end; justify-content: center; padding: 0 6% 6%; }
+.start-panel { pointer-events: auto; width: min(340px, 100%); text-align: center; padding: 20px; border: 1px solid #dacb9f40; border-radius: 15px; background: linear-gradient(145deg, #112524f8, #0d1d1ef5); box-shadow: 0 14px 40px #07191466; backdrop-filter: blur(8px); }
+.start-panel h2 { font: 28px/1.2 var(--serif); }
+.start-actions { display: flex; align-items: center; justify-content: center; gap: 9px; margin-top: 16px; }
+.button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 18px; border: 1px solid transparent; border-radius: 9px; font-size: 14px; font-weight: 600; white-space: nowrap; }
+.button svg { width: 18px; height: 18px; }
+.button:hover:not(:disabled) { filter: brightness(1.08); }
+.button:active:not(:disabled) { transform: translateY(1px); }
+.primary { color: #26302a; background: linear-gradient(135deg, #edcd92, #d9ac65); box-shadow: 0 4px 14px #0002, inset 0 1px 0 #ffffff33; }
+.quiet { border-color: #e6e0c033; background: #e6e0c009; color: #c0cbbc; }
+.start-actions .button { flex: 1; max-width: 140px; }
+.start-hint { display: block; margin-top: 12px; color: #adc2b5; font-size: 11px; }
+.start-hint span { padding: 0 4px; }
+.center-overlay { align-items: center; justify-content: center; overflow: auto; padding: 15px; background: #091916a8; backdrop-filter: blur(4px); pointer-events: auto; }
+.state-panel { pointer-events: auto; width: min(360px, 100%); max-height: 100%; overflow-y: auto; text-align: center; padding: 22px; border: 1px solid #d9c28b44; border-radius: 15px; background: linear-gradient(150deg, #1a3332, #12262a); box-shadow: 0 15px 40px #0005; }
+.state-panel h2 { margin-top: 6px; font: 28px/1.2 var(--serif); }
+.state-panel > p:not(.eyebrow):not(.new-best) { margin-top: 9px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.panel-symbol { display: grid; place-items: center; margin: 0 auto 10px; color: var(--gold); }
+.panel-symbol svg { width: 29px; height: 29px; }
+.state-panel > .button { width: 100%; margin-top: 16px; }
+.result-score { display: flex; flex-direction: column; align-items: center; padding: 13px 0 6px; }
+.result-score strong { color: var(--gold); font: 48px/1 var(--serif); }
+.result-score span { margin-top: 4px; color: var(--muted); font-size: 12px; }
+.new-best { color: var(--gold); font-size: 12px; padding: 4px 0; }
+.score-form { margin-top: 11px; text-align: left; }
+.score-form label { display: block; margin-bottom: 7px; color: var(--muted); font-size: 12px; }
+.name-row { display: flex; gap: 7px; }
+.name-row input { flex: 1; min-width: 0; width: 100%; padding: 10px; border: 1px solid var(--line); border-radius: 7px; color: var(--ink); background: #0a202566; font-size: 16px; }
+.name-row input::placeholder { color: var(--dim); }
+.save-button { padding: 8px 12px; color: var(--gold); border-color: #e4bd7a55; background: #e4bd7a0c; }
+.save-status { min-height: 18px; margin-top: 5px; color: var(--sage); font-size: 11px; }
+.result-panel > .button { margin-top: 10px; }
+.result-panel .text-button { margin-top: 3px; }
+.demo-tag { position: absolute; top: 3%; right: 3%; padding: 5px 9px; border: 1px solid #d9bb7d55; border-radius: 7px; background: #10292de8; color: var(--gold); font-size: 11px; letter-spacing: .09em; pointer-events: none; }
+.demo-tag span { display: block; color: var(--muted); font-size: 10px; letter-spacing: 0; }
+.collect-toast { position: absolute; top: 8%; left: 50%; transform: translate(-50%, -6px); padding: 7px 13px; border: 1px solid #c7b37d55; border-radius: 24px; background: #102621ed; color: var(--gold); font-size: 13px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
+.collect-toast.visible { opacity: 1; transform: translate(-50%, 0); }
+dialog { width: calc(100% - 32px); max-width: 450px; max-height: calc(100dvh - 32px); overflow-y: auto; padding: 24px; border: 1px solid #8ca58f66; border-radius: 18px; color: var(--ink); background: linear-gradient(150deg, #1b3336, #11262b); box-shadow: 0 30px 100px #0008; }
+dialog::backdrop { background: #06171bd9; backdrop-filter: blur(5px); }
+.dialog-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 20px; }
+.dialog-heading h2 { margin-top: 4px; font: 28px/1.2 var(--serif); }
+.dialog-heading .eyebrow { font-size: 10px; }
+.setting-row { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-top: 18px; padding-top: 15px; border-top: 1px solid var(--line); }
+.setting-row label strong { display: block; font-size: 15px; font-weight: 500; }
+.setting-row label span { display: block; margin-top: 3px; color: var(--muted); font-size: 13px; }
+.switch { appearance: none; position: relative; flex-shrink: 0; width: 42px; height: 26px; border: 1px solid #94ae8f66; border-radius: 15px; background: #081e22; cursor: pointer; }
+.switch::before { content: ''; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #9bb5a9; transition: transform .18s; }
+.switch:checked { background: #ba9d5f; border-color: #ba9d5f; }
+.switch:checked::before { transform: translateX(15px); background: #17282a; }
+.dialog-done { width: 100%; margin-top: 22px; }
+.help-copy { color: var(--muted); font-size: 14px; line-height: 1.7; }
+.help-copy p + p { margin-top: 12px; }
+.help-copy strong { color: var(--ink); }
+.help-copy dl { margin: 17px 0; }
+.help-copy dl > div { display: grid; grid-template-columns: 68px 1fr; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.help-copy dt { color: var(--gold); }
+.help-copy dd { margin: 0; }
+body.reduced-motion *, body.reduced-motion *::before, body.reduced-motion *::after { animation: none !important; transition: none !important; }
+body.focus-view .app { --stage-size: min(944px, calc(100dvh - 170px), calc(100vw - 42px)); max-width: calc(var(--stage-size) + 42px); }
+body.focus-view .workspace { grid-template-columns: minmax(0, 1fr); }
+body.focus-view .sidebar, body.focus-view .footer { display: none; }
+@media (min-width: 1250px) and (min-height: 850px) {
+  .toolbar-hint { display: inline; }
+}
+@media (min-width: 900px) and (max-height: 690px) {
+  .app { --stage-size: min(944px, calc(100dvh - 170px), calc(100vw - 322px)); }
+  .score-strip { gap: 18px; }
+  .score-stat small { font-size: 10px; }
+  .state-label { font-size: 11px; }
+  .toolbar-button { font-size: 12px; padding-inline: 5px; gap: 4px; }
+  .game-actions { gap: 3px; }
+  .icon-button { width: 36px; }
+  .keyboard-note .key-cluster { display: none; }
+  .state-panel { padding: 16px; }
+  .result-panel .panel-symbol { display: none; }
+  .result-panel h2 { font-size: 25px; }
+  .result-score strong { font-size: 38px; }
+}
+@media (max-width: 899px) {
+  .app, body.focus-view .app { width: 100%; max-width: 680px; min-height: 100dvh; padding: 10px; }
+  .workspace, body.focus-view .workspace { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+  .sidebar { max-height: none; overflow: visible; padding-right: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; align-items: start; }
+  .scene-panel { grid-column: 1 / -1; }
+  .scene-options { gap: 8px; }
+  .scene-option { min-height: 44px; font-size: 14px; }
+  .footer { position: static; width: 100%; height: auto; justify-content: center; padding: 14px 0 8px; }
+  .score-strip { height: 52px; }
+  .touch-controls { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 2px 4px 4px; }
+  .touch-controls > p { color: var(--muted); font-size: 13px; line-height: 1.6; }
+  .touch-controls > p span { color: var(--dim); font-size: 12px; }
+  .dpad { display: grid; grid-template-columns: repeat(3, 44px); grid-template-rows: repeat(3, 40px); gap: 4px; }
+  .dpad button { display: grid; place-items: center; padding: 0; border: 1px solid #9ab5a744; border-radius: 9px; background: #1c3337; touch-action: none; }
+  .dpad button:active { color: #16302d; background: var(--gold); }
+  .dpad svg { width: 23px; height: 23px; }
+  .dir-up { grid-area: 1 / 2; }
+  .dir-left { grid-area: 2 / 1; }
+  .dir-left svg { transform: rotate(-90deg); }
+  .dir-right { grid-area: 2 / 3; }
+  .dir-right svg { transform: rotate(90deg); }
+  .dir-down { grid-area: 3 / 2; }
+  .dir-down svg { transform: rotate(180deg); }
+  .dpad-center { grid-area: 2 / 2; display: grid; place-items: center; color: #90a58a55; }
+  .dpad-center svg { width: 26px; height: 26px; }
+  .below-arena { min-height: 28px; padding: 4px 3px; }
+  .keyboard-note { font-size: 11px; }
+  .keyboard-note .key-cluster { display: none; }
+}
+@media (max-width: 560px) {
+  .app, body.focus-view .app { padding: 8px; }
+  .arena-frame { padding: 0 5px; border-radius: 13px; }
+  .score-strip { height: 48px; gap: 17px; padding: 0 5px; }
+  .score-stat { gap: 6px; }
+  .score-stat svg { width: 17px; height: 17px; }
+  .score-stat small { font-size: 9px; letter-spacing: .025em; }
+  .score-stat strong { font-size: 22px; }
+  .state-label { font-size: 10px; }
+  .scene-label { font-size: 6px; gap: 4px; }
+  .stage { border-radius: 8px; }
+  .arena-toolbar { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3px 8px; padding: 5px 2px; }
+  .toolbar-actions { grid-column: 1 / -1; width: 100%; gap: 5px; }
+  .toolbar-button { flex: 1; min-height: 40px; padding: 6px 8px; font-size: 13px; border: 1px solid var(--line); background: #ffffff03; }
+  .arena-toolbar:has(.stop-demo:not([hidden])) #demoToggleBtn { display: inline-flex; }
+  .game-actions { grid-column: 1; grid-row: 2; margin-left: 0; gap: 5px; }
+  .game-actions .icon-button { width: 40px; height: 40px; }
+  .stop-demo { grid-column: 2; grid-row: 2; justify-self: end; font-size: 12px; }
+  .toolbar-hint { display: none; }
+  .below-arena { font-size: 11px; }
+  .keyboard-note { display: none; }
+  .length-note { margin-left: auto; }
+  .ready-overlay { padding: 0 6% 5%; }
+  .start-panel { padding: 14px; border-radius: 12px; }
+  .start-panel h2 { font-size: 24px; }
+  .start-actions { margin-top: 12px; gap: 8px; }
+  .start-actions .button { min-height: 42px; padding: 8px 16px; }
+  .start-hint { font-size: 10px; margin-top: 9px; }
+  .demo-tag { top: 3%; right: 3%; font-size: 9px; padding: 4px 7px; }
+  .demo-tag span { font-size: 8px; }
+  .collect-toast { font-size: 11px; padding: 5px 9px; }
+  .sidebar { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .scene-panel { grid-column: auto; }
+  .leaderboard-panel { padding: 17px; }
+  .dragon-link { max-height: 280px; }
+  .center-overlay { position: fixed; inset: 0; z-index: 50; padding: 18px; background: #071c20ed; }
+  .state-panel { margin: auto; padding: 22px 18px; max-height: calc(100dvh - 36px); }
+  .result-panel .panel-symbol { display: grid; }
+  .state-panel h2 { font-size: 28px; }
+  .result-score strong { font-size: 48px; }
+  .state-panel > .button { min-height: 44px; }
+  .state-panel .text-button { min-height: 40px; }
+  .name-row input { font-size: 16px; }
+  dialog { padding: 20px; }
+}
+@media (max-width: 350px) {
+  .score-strip { gap: 12px; }
+  .score-stat svg { display: none; }
+  .state-label { font-size: 9px; }
+  .touch-controls > p { font-size: 12px; }
+  .touch-controls > p span { font-size: 11px; }
+  .start-panel h2 { font-size: 22px; }
 }
 </style>
 </head>
@@ -59,63 +355,63 @@
   </defs></svg>
 
   <div class="app" id="app">
-    <header class="masthead">
-      <div class="brand"><span class="brand-seal"><svg aria-hidden="true"><use href="#i-dragon"/></svg></span><span>WELSH DRAGON<small>A LITTLE FIRE. A BIG ADVENTURE.</small></span></div>
-      <div class="header-actions">
-        <button type="button" class="icon-button" id="soundBtn" aria-label="Turn sound on" aria-pressed="false" title="Sound off"><svg aria-hidden="true"><use href="#i-mute"/></svg></button>
-        <button type="button" class="icon-button" id="helpBtn" aria-label="How to play" title="How to play"><svg aria-hidden="true"><use href="#i-help"/></svg></button>
-        <button type="button" class="icon-button" id="settingsBtn" aria-label="Game settings" title="Game settings"><svg aria-hidden="true"><use href="#i-settings"/></svg></button>
-        <button type="button" class="icon-button fullscreen-button" id="fullscreenBtn" aria-label="Enter fullscreen" title="Fullscreen"><svg aria-hidden="true"><use href="#i-expand"/></svg></button>
-      </div>
-    </header>
-
     <main class="workspace">
       <section class="play-column" aria-label="Welsh Dragon game">
-        <div class="game-heading"><div><p class="eyebrow" id="sceneEyebrow">AN ENCHANTED WOODLAND</p><h1 id="sceneName">The Ember Grove</h1></div><span class="state-label" id="stateLabel">Ready to roam</span></div>
         <div class="arena-frame" id="arenaFrame">
           <div class="score-strip">
             <div class="score-stat primary-stat"><svg aria-hidden="true"><use href="#i-mug"/></svg><span><small>TANKARDS</small><strong id="score">00</strong></span></div>
             <div class="score-stat"><svg aria-hidden="true"><use href="#i-crown"/></svg><span><small>PERSONAL BEST</small><strong id="best">00</strong></span></div>
-            <div class="speed-badge" id="speedBadge">Classic</div>
+            <span class="state-label" id="stateLabel">Ready</span>
           </div>
           <div class="stage" id="stage">
-            <canvas id="game" width="800" height="800" tabindex="0" aria-label="Welsh Dragon playfield. Use arrow keys or W A S D to steer. Collect tankards and avoid the walls and your tail." aria-describedby="gameInstructions"></canvas>
+            <canvas id="game" width="944" height="944" tabindex="0" aria-label="Welsh Dragon playfield. Use arrow keys or W A S D to steer. Collect tankards and avoid the walls and your tail." aria-describedby="controlHint"></canvas>
             <div class="scene-label" aria-hidden="true"><span class="scene-dot"></span><span id="arenaCaption">THE GROVE</span></div>
             <div class="demo-tag" id="demoTag" hidden>DEMO <span>Scores are not recorded</span></div>
 
             <div class="overlay ready-overlay" id="readyOverlay">
               <div class="start-panel">
-                <p class="eyebrow">A FAMILIAR GAME. A NEW LITTLE LEGEND.</p>
-                <h2>Let the legend grow.</h2>
-                <p>Follow the golden tankards.<br>Mind your tail. Find your flow.</p>
-                <div class="start-actions"><button class="button primary" type="button" id="startBtn"><svg aria-hidden="true"><use href="#i-play"/></svg>Start adventure</button><button class="button quiet" type="button" id="demoBtn">Watch demo</button></div>
+                <h2>Ready to play?</h2>
+                <div class="start-actions"><button class="button primary" type="button" id="startBtn"><svg aria-hidden="true"><use href="#i-play"/></svg>Play</button><button class="button quiet" type="button" id="demoBtn">Demo</button></div>
                 <small class="start-hint">Arrows or WASD <span>·</span> Swipe on mobile</small>
               </div>
             </div>
 
-            <div class="overlay center-overlay" id="pauseOverlay" hidden><div class="state-panel pause-panel"><span class="panel-symbol"><svg aria-hidden="true"><use href="#i-pause"/></svg></span><p class="eyebrow">TAKE A BREATHER</p><h2>A moment in the grove.</h2><p id="pauseReason">Your adventure is right where you left it.</p><button type="button" class="button primary" id="resumeBtn"><svg aria-hidden="true"><use href="#i-play"/></svg>Keep exploring</button></div></div>
+            <div class="overlay center-overlay" id="pauseOverlay" hidden><div class="state-panel pause-panel"><span class="panel-symbol"><svg aria-hidden="true"><use href="#i-pause"/></svg></span><h2>Paused</h2><p id="pauseReason">Press Space or Resume to continue.</p><button type="button" class="button primary" id="resumeBtn"><svg aria-hidden="true"><use href="#i-play"/></svg>Resume</button></div></div>
 
-            <div class="overlay center-overlay" id="overOverlay" hidden><section class="state-panel result-panel" role="dialog" aria-labelledby="resultTitle" aria-describedby="resultReason"><span class="panel-symbol"><svg aria-hidden="true"><use href="#i-crown"/></svg></span><p class="eyebrow" id="resultEyebrow">ANOTHER TALE TO TELL</p><h2 id="resultTitle">A fine little adventure.</h2><p id="resultReason">The edge of the grove caught you.</p><div class="result-score"><strong id="finalScore">0</strong><span>tankards collected</span></div><p class="new-best" id="newBest" hidden>A new personal best!</p><form id="scoreForm" class="score-form"><label for="playerName">Leave your name in the hall of fame</label><div class="name-row"><input id="playerName" name="name" maxlength="16" placeholder="Dragon keeper" autocomplete="nickname"><button type="submit" class="button save-button" id="saveScoreBtn">Save</button></div><p class="save-status" id="saveStatus" role="status"></p></form><button type="button" class="button primary" id="retryBtn"><svg aria-hidden="true"><use href="#i-restart"/></svg>Try another adventure</button><button type="button" class="text-button" id="backBtn">Back to the grove</button></section></div>
+            <div class="overlay center-overlay" id="overOverlay" hidden><section class="state-panel result-panel" role="dialog" aria-labelledby="resultTitle" aria-describedby="resultReason"><span class="panel-symbol"><svg aria-hidden="true"><use href="#i-crown"/></svg></span><p class="eyebrow" id="resultEyebrow">YOUR RESULT</p><h2 id="resultTitle">Game over</h2><p id="resultReason">You reached the edge of the field.</p><div class="result-score"><strong id="finalScore">0</strong><span>tankards collected</span></div><p class="new-best" id="newBest" hidden>A new personal best!</p><form id="scoreForm" class="score-form"><label for="playerName">Save your score to the leaderboard</label><div class="name-row"><input id="playerName" name="name" maxlength="16" placeholder="Dragon keeper" autocomplete="nickname"><button type="submit" class="button save-button" id="saveScoreBtn">Save</button></div><p class="save-status" id="saveStatus" role="status"></p></form><button type="button" class="button primary" id="retryBtn"><svg aria-hidden="true"><use href="#i-restart"/></svg>Play again</button><button type="button" class="text-button" id="backBtn">Back to start</button></section></div>
             <div class="collect-toast" id="collectToast" aria-hidden="true"></div>
           </div>
-          <div class="arena-toolbar"><div class="toolbar-actions"><button type="button" class="toolbar-button" id="pauseBtn" aria-label="Pause game" aria-keyshortcuts="Space P" disabled><svg aria-hidden="true"><use href="#i-pause"/></svg><span>Pause</span></button><button type="button" class="toolbar-button" id="restartBtn" aria-label="Start a new run"><svg aria-hidden="true"><use href="#i-restart"/></svg><span>New run</span></button></div><span class="toolbar-hint" id="toolbarHint"><kbd>SPACE</kbd> to pause</span><button type="button" class="text-button stop-demo" id="stopDemoBtn" hidden>Take the reins</button></div>
+          <div class="arena-toolbar"><div class="toolbar-actions"><button type="button" class="toolbar-button" id="pauseBtn" aria-label="Pause game" aria-keyshortcuts="Space P" disabled><svg aria-hidden="true"><use href="#i-pause"/></svg><span>Pause</span></button><button type="button" class="toolbar-button" id="restartBtn" aria-label="Start a new run" aria-keyshortcuts="R"><svg aria-hidden="true"><use href="#i-restart"/></svg><span>New run</span></button><button type="button" class="toolbar-button" id="demoToggleBtn" aria-label="Start demo" aria-pressed="false" aria-keyshortcuts="0"><svg aria-hidden="true"><use href="#i-play"/></svg><span>Demo</span></button></div><span class="toolbar-hint" id="toolbarHint"><kbd>SPACE</kbd> pause</span><button type="button" class="text-button stop-demo" id="stopDemoBtn" hidden>Take control</button><div class="game-actions" role="group" aria-label="Game controls">
+        <button type="button" class="icon-button" id="soundBtn" aria-label="Turn sound on" aria-pressed="false" title="Sound off"><svg aria-hidden="true"><use href="#i-mute"/></svg></button>
+        <button type="button" class="icon-button" id="helpBtn" aria-label="How to play" title="How to play"><svg aria-hidden="true"><use href="#i-help"/></svg></button>
+        <button type="button" class="icon-button" id="settingsBtn" aria-label="Game settings" title="Game settings"><svg aria-hidden="true"><use href="#i-settings"/></svg></button>
+        <button type="button" class="icon-button fullscreen-button" id="fullscreenBtn" aria-label="Enter fullscreen" title="Fullscreen"><svg aria-hidden="true"><use href="#i-expand"/></svg></button>
+          </div></div>
         </div>
-        <div class="below-arena"><p class="keyboard-note"><span class="key-cluster"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span><span>or arrow keys to steer</span></p><span class="length-note">Dragon length <strong id="length">07</strong></span></div>
+        <div class="below-arena"><p class="keyboard-note" id="controlHint"><span class="key-cluster"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span><span>or arrows · Space pauses · R restarts</span></p><span class="length-note">Length <strong id="length">03</strong></span></div>
         <div class="touch-controls" aria-label="Touch direction controls"><p>Swipe in the grove<br><span>or use the direction pad.</span></p><div class="dpad" role="group" aria-label="Steer the dragon"><button type="button" class="dir-up" data-direction="up" aria-label="Turn up"><svg aria-hidden="true"><use href="#i-up"/></svg></button><button type="button" class="dir-left" data-direction="left" aria-label="Turn left"><svg aria-hidden="true"><use href="#i-up"/></svg></button><span class="dpad-center" aria-hidden="true"><svg><use href="#i-dragon"/></svg></span><button type="button" class="dir-right" data-direction="right" aria-label="Turn right"><svg aria-hidden="true"><use href="#i-up"/></svg></button><button type="button" class="dir-down" data-direction="down" aria-label="Turn down"><svg aria-hidden="true"><use href="#i-up"/></svg></button></div></div>
         <p id="liveMessage" class="sr-only" role="status" aria-live="polite"></p>
       </section>
 
       <aside class="sidebar">
-        <section class="leaderboard-panel"><div class="section-title"><span class="eyebrow">LOCAL LEGENDS</span><svg aria-hidden="true"><use href="#i-crown"/></svg></div><h2>Hall of fame</h2><p class="section-subtitle">A little friendly competition.</p><label class="sr-only" for="leaderboardMode">Filter scores by speed</label><select id="leaderboardMode" class="score-filter"><option value="all">All speeds</option><option value="leisure">Leisure</option><option value="classic">Classic</option><option value="swift">Swift</option></select><ol id="leaderboard" class="leaderboard"></ol><div class="empty-scores" id="emptyScores"><span class="empty-crown"><svg aria-hidden="true"><use href="#i-crown"/></svg></span><h3>A legend begins with you.</h3><p>Play a round and save your score<br>to claim the first spot.</p></div><p class="local-note" id="storageNote">Scores stay in this browser.</p></section>
-        <section class="how-panel" id="gameInstructions"><p class="eyebrow">THE DRAGON’S WAY</p><h2>Small dragon. Big appetite.</h2><div class="rule"><span class="rule-icon gold"><svg aria-hidden="true"><use href="#i-mug"/></svg></span><p><strong>Collect & grow</strong><span>Every golden tankard adds one point and a little more dragon.</span></p></div><div class="rule"><span class="rule-icon coral"><svg aria-hidden="true"><use href="#i-shield"/></svg></span><p><strong>Keep your head</strong><span>Avoid the stone boundary and your own winding tail.</span></p></div><div class="rule"><span class="rule-icon sage"><svg aria-hidden="true"><use href="#i-spark"/></svg></span><p><strong>Find your rhythm</strong><span>Plan your next turn. Leave yourself a way through.</span></p></div></section>
-        <section class="scene-panel"><p class="eyebrow">A CHANGE OF SCENERY</p><div class="scene-options" role="group" aria-label="Choose scenery"><button type="button" class="scene-option active" data-theme="grove" aria-pressed="true"><span class="scene-preview grove-preview"><i></i><b></b></span><span>Grove</span></button><button type="button" class="scene-option" data-theme="dusk" aria-pressed="false"><span class="scene-preview dusk-preview"><i></i><b></b></span><span>Dusk</span></button><button type="button" class="scene-option" data-theme="frost" aria-pressed="false"><span class="scene-preview frost-preview"><i></i><b></b></span><span>Frost</span></button></div><p class="scene-note">Same adventure. A different kind of magic.</p></section>
+        <section class="scene-panel" aria-label="Scenery"><div class="scene-options" role="group" aria-label="Choose scenery"><button type="button" class="scene-option active" data-theme="grove" aria-pressed="true"><span class="scene-preview grove-preview"><i></i><b></b></span><span>Grove</span></button><button type="button" class="scene-option" data-theme="dusk" aria-pressed="false"><span class="scene-preview dusk-preview"><i></i><b></b></span><span>Dusk</span></button><button type="button" class="scene-option" data-theme="frost" aria-pressed="false"><span class="scene-preview frost-preview"><i></i><b></b></span><span>Frost</span></button></div></section>
+        <section class="leaderboard-panel">
+          <div class="section-title"><h2>Leaderboard</h2><svg aria-hidden="true"><use href="#i-crown"/></svg></div><p class="section-subtitle">All three sceneries</p>
+          <ol id="leaderboard" class="leaderboard"><li class="legend-entry" aria-label="#1 Phoenix 189"><span class="rank">#1</span><div class="rank-name"><strong>Phoenix</strong><small>Legend</small></div><span class="rank-score">189</span></li></ol>
+          <div class="empty-scores" id="emptyScores"><p>Save a run to join Phoenix<br>on the leaderboard.</p></div>
+          <p class="local-note" id="storageNote">Shared across Grove, Dusk and Frost.<br>Scores stay in this browser.</p>
+        </section>
+          <div class="link-image-frame">
+            <img id="linkImage" src="link.png" class="dragon-link" alt="Link to the test">
+            <p id="linkImageError" class="link-image-error" role="status" hidden><strong>link.png could not be loaded.</strong><span>Keep link.png in the same folder as this HTML file.</span></p>
+          </div>
       </aside>
     </main>
-    <footer class="footer"><span>WELSH DRAGON <i>·</i> A browser arcade</span><button class="text-button" id="downloadBtn" type="button"><svg aria-hidden="true"><use href="#i-download"/></svg>Download game</button></footer>
+    <footer class="footer"><button class="text-button" id="downloadBtn" type="button"><svg aria-hidden="true"><use href="#i-download"/></svg>Download game</button></footer>
   </div>
 
-  <dialog id="settingsDialog"><div class="dialog-heading"><div><p class="eyebrow">MAKE YOURSELF AT HOME</p><h2>Your adventure</h2></div><button type="button" class="icon-button" data-close-dialog aria-label="Close settings"><svg aria-hidden="true"><use href="#i-close"/></svg></button></div><fieldset><legend>Choose your pace</legend><p class="dialog-description">Applies to your next run. Each pace has its own personal best.</p><div class="pace-options"><label><input type="radio" name="pace" value="leisure"><span><strong>Leisure</strong><small>A little room to breathe</small></span></label><label><input type="radio" name="pace" value="classic" checked><span><strong>Classic</strong><small>The original arcade feeling</small></span></label><label><input type="radio" name="pace" value="swift"><span><strong>Swift</strong><small>For quick-thinking dragons</small></span></label></div></fieldset><div class="setting-row"><label for="soundSetting"><strong>Sound effects</strong><span>Soft chimes and little celebrations</span></label><input class="switch" type="checkbox" id="soundSetting"></div><div class="setting-row"><label for="motionSetting"><strong>Reduce motion</strong><span>Fewer particles and no ambient movement</span></label><input class="switch" type="checkbox" id="motionSetting"></div><button type="button" class="button primary dialog-done" data-close-dialog>Done</button></dialog>
-  <dialog id="helpDialog"><div class="dialog-heading"><div><p class="eyebrow">A QUICK FIELD GUIDE</p><h2>How to play</h2></div><button type="button" class="icon-button" data-close-dialog aria-label="Close help"><svg aria-hidden="true"><use href="#i-close"/></svg></button></div><div class="help-copy"><p>Guide your Welsh dragon to the glowing golden tankard. Each one adds <strong>one point and one body segment</strong>. A new tankard appears in an empty tile.</p><p>Stay inside the stone arena and avoid your own body. You can turn at right angles, but cannot reverse directly into your neck. Your wings are decorative; collisions follow the tiled path of your body.</p><dl><div><dt>Steer</dt><dd>Arrow keys or W A S D</dd></div><div><dt>Touch</dt><dd>Swipe on the arena or use the direction pad</dd></div><div><dt>Pause</dt><dd>Space, P, or the Pause button</dd></div><div><dt>Restart</dt><dd>New run or the result screen</dd></div></dl><p>Save your name after a run to join the local hall of fame. Scores are stored only in this browser. Demo runs do not count.</p><p>The game pauses when you switch tabs or open a menu. Resume when you are ready.</p></div><button type="button" class="button primary dialog-done" data-close-dialog>Got it</button></dialog>
+  <dialog id="settingsDialog"><div class="dialog-heading"><div><h2>Settings</h2></div><button type="button" class="icon-button" data-close-dialog aria-label="Close settings"><svg aria-hidden="true"><use href="#i-close"/></svg></button></div><div class="setting-row"><label for="soundSetting"><strong>Sound effects</strong><span>Soft chimes and little celebrations</span></label><input class="switch" type="checkbox" id="soundSetting"></div><div class="setting-row"><label for="motionSetting"><strong>Reduce motion</strong><span>Fewer particles and no ambient movement</span></label><input class="switch" type="checkbox" id="motionSetting"></div><button type="button" class="button primary dialog-done" data-close-dialog>Done</button></dialog>
+  <dialog id="helpDialog"><div class="dialog-heading"><div><h2>How to play</h2></div><button type="button" class="icon-button" data-close-dialog aria-label="Close help"><svg aria-hidden="true"><use href="#i-close"/></svg></button></div><div class="help-copy"><p>Guide your Welsh dragon to the glowing golden tankard. Each one adds <strong>one point and one body segment</strong>. A new tankard appears in an empty tile.</p><p>Stay inside the stone arena and avoid your own body. You can turn at right angles, but cannot reverse directly into your neck. Each body segment follows one tile. The game uses one pace: one move every 90 milliseconds, with a larger 20 by 20 field to explore.</p><dl><div><dt>Steer</dt><dd>Arrow keys or W A S D</dd></div><div><dt>Touch</dt><dd>Swipe on the arena or use the direction pad</dd></div><div><dt>Pause</dt><dd>Space, P, or the Pause button</dd></div><div><dt>Restart</dt><dd>R, New run, or Play again</dd></div><div><dt>Demo</dt><dd>Press 0 or Demo. The original demo logic chooses each turn by reachable food, free space, and distance. It restarts immediately after a loss. Press 0 again or Take control to steer the same dragon.</dd></div></dl><p>Phoenix stays at #1 with 189. Your scores appear below, ranked highest first. Grove, Dusk and Frost share this leaderboard. Scores are stored in this browser. Demo runs and runs taken over from a demo are practice; start a new run to save a score.</p><p>Opening a menu pauses your run; closing it resumes the run if you were playing. Switching tabs pauses the game until you choose to resume. The Space shortcut also works after using scenery and sound controls.</p></div><button type="button" class="button primary dialog-done" data-close-dialog>Got it</button></dialog>
   <noscript>This game needs JavaScript. Enable it in your browser to play.</noscript>
   <script>/* Welsh Dragon: deterministic grid simulation, independent of rendering/timing.
  * queue() accepts up/down/left/right while playing and keeps at most two turns.
@@ -123,7 +419,7 @@
  * step() returns {type, position, score, moved}; terminal events include reason.
  * An inactive step never mutates state and reports moved:false. On growth,
  * previous has the same length as snake, with its old tail duplicated so every
- * segment can be interpolated. Demo follows a Hamiltonian cycle (even sizes).
+ * segment can be interpolated. Demo uses the original one-turn flood-fill AI.
  */
 (function () {
   'use strict';
@@ -145,7 +441,7 @@
   };
 
   class DragonEngine {
-    constructor({ size = 24, rng = Math.random } = {}) {
+    constructor({ size = 20, rng = Math.random } = {}) {
       if (!Number.isInteger(size) || size < 4) {
         throw new RangeError('The board size must be an integer of at least 4.');
       }
@@ -153,72 +449,38 @@
       this.size = size;
       this.rng = rng;
       this.runId = 0;
-      this._cycle = size % 2 === 0 ? this._makeCycle() : null;
-      this._cycleLookup = new Map();
-      if (this._cycle) {
-        this._cycle.forEach((point, index) => {
-          this._cycleLookup.set(point.y * size + point.x, index);
-        });
-      }
       this.reset();
     }
 
-    _makeCycle() {
-      const cycle = [{ x: 0, y: 0 }];
-      for (let y = 0; y < this.size; y += 1) {
-        if (y % 2 === 0) {
-          for (let x = 1; x < this.size; x += 1) cycle.push({ x, y });
-        } else {
-          for (let x = this.size - 1; x >= 1; x -= 1) cycle.push({ x, y });
-        }
-      }
-      for (let y = this.size - 1; y >= 1; y -= 1) cycle.push({ x: 0, y });
-      return cycle;
-    }
-
     reset({ demo = false } = {}) {
-      if (demo && !this._cycle) {
-        throw new RangeError('Demo mode needs an even board size.');
-      }
       this.demo = Boolean(demo);
+      this.usedDemo = this.demo;
       this.runId += 1;
       this.score = 0;
       this.state = 'ready';
       this._turns = [];
       this._endReason = null;
-      const hx = Math.min(10, this.size - 3);
-      const hy = Math.min(9, this.size - 2);
-
-      if (this.demo) {
-        const headIndex = this._cycleLookup.get(hy * this.size + hx);
-        const count = this._cycle.length;
-        this.snake = Array.from({ length: 7 }, (_, i) =>
-          clone(this._cycle[(headIndex - i + count) % count]));
-        const next = this._cycle[(headIndex + 1) % count];
-        this.direction = { x: next.x - hx, y: next.y - hy };
-      } else if (this.size >= 8) {
-        this.snake = [
-          { x: hx, y: hy }, { x: hx - 1, y: hy },
-          { x: hx - 2, y: hy }, { x: hx - 3, y: hy },
-          { x: hx - 4, y: hy }, { x: hx - 4, y: hy + 1 },
-          { x: hx - 5, y: hy + 1 }
-        ];
-        this.direction = clone(DIRECTIONS.right);
-      } else {
-        const y = Math.floor(this.size / 2);
-        this.snake = [];
-        for (let x = this.size - 2; x >= 0; x -= 1) this.snake.push({ x, y });
-        for (let x = 0; this.snake.length < 7; x += 1) {
-          this.snake.push({ x, y: y + 1 });
-        }
-        this.direction = clone(DIRECTIONS.right);
-      }
-
+      const center = Math.floor(this.size / 2);
+      this.snake = [
+        { x: center, y: center },
+        { x: center - 1, y: center },
+        { x: center - 2, y: center }
+      ];
+      this.direction = clone(DIRECTIONS.right);
       this.previous = this.snake.map(clone);
-      const firstFood = { x: 16, y: 10 };
-      this.food = !this.demo && firstFood.x < this.size && firstFood.y < this.size &&
-        !this.snake.some(part => same(part, firstFood)) ? firstFood : this._spawnFood();
+      this.food = this._spawnFood();
       return this;
+    }
+
+    setDemo(enabled) {
+      const next = Boolean(enabled);
+      const changed = next !== this.demo;
+      this.demo = next;
+      // Taking control keeps the run intact, but its assisted score is never
+      // eligible for the leaderboard, even after the demo is switched off.
+      this.usedDemo = this.usedDemo || next;
+      this._turns = [];
+      return changed;
     }
 
     start(initialDir) {
@@ -263,26 +525,57 @@
         }
       }
       if (!free.length) return null;
-      let candidates = free;
-      if (this.demo) {
-        const head = this.snake[0];
-        const headIndex = this._cycleLookup.get(head.y * this.size + head.x);
-        const preferred = [];
-        const ahead = [];
-        for (let offset = 1; offset < this._cycle.length; offset += 1) {
-          const point = this._cycle[(headIndex + offset) % this._cycle.length];
-          if (!occupied.has(point.y * this.size + point.x)) {
-            ahead.push(point);
-            if (offset >= 10 && offset <= 18) preferred.push(point);
-          }
-        }
-        // Keep the exhibit active without changing its guaranteed-safe route.
-        // Near the end, fewer than ten free cells remain; use those instead.
-        candidates = preferred.length ? preferred : ahead.slice(0, 18);
-      }
       const sample = Number(this.rng());
       const unit = Number.isFinite(sample) ? Math.max(0, Math.min(1 - Number.EPSILON, sample)) : 0;
-      return clone(candidates[Math.floor(unit * candidates.length)]);
+      return clone(free[Math.floor(unit * free.length)]);
+    }
+
+    _chooseDemoDirection() {
+      // This is the uploaded game's decision rule: consider one turn at a
+      // time, preferring reachable food, then open space, then food distance.
+      // Preserve its right/left/down/up tie order instead of planning a route.
+      const directions = [DIRECTIONS.right, DIRECTIONS.left, DIRECTIONS.down, DIRECTIONS.up];
+      const head = this.snake[0];
+      const total = this.size * this.size;
+      const blocked = new Uint8Array(total);
+      for (let i = 0; i < this.snake.length - 1; i += 1) {
+        blocked[this.snake[i].y * this.size + this.snake[i].x] = 1;
+      }
+      const rankedMoves = directions.filter(direction => !reverse(direction, this.direction)).map(direction => {
+        const next = { x: head.x + direction.x, y: head.y + direction.y };
+        const grows = Boolean(this.food && same(next, this.food));
+        const occupiedLength = this.snake.length - (grows ? 0 : 1);
+        const distance = this.food ? Math.abs(this.food.x - next.x) + Math.abs(this.food.y - next.y) : 0;
+        const safe = next.x >= 0 && next.y >= 0 && next.x < this.size && next.y < this.size &&
+          !this.snake.slice(0, occupiedLength).some(part => same(part, next));
+        if (!safe) return { direction, safe, distance, reachable: 0, canReachFood: false };
+
+        // As in the original, the free-space heuristic allows the moving tail.
+        // The immediate move above still uses the correct growth collision rule.
+        const visited = new Uint8Array(total);
+        const queue = new Int32Array(total);
+        const start = next.y * this.size + next.x;
+        queue[0] = start;
+        visited[start] = 1;
+        let reachable = 1;
+        for (let i = 0; i < reachable; i += 1) {
+          const cell = queue[i], x = cell % this.size, y = Math.floor(cell / this.size);
+          for (const step of directions) {
+            const nx = x + step.x, ny = y + step.y;
+            if (nx < 0 || ny < 0 || nx >= this.size || ny >= this.size) continue;
+            const candidate = ny * this.size + nx;
+            if (blocked[candidate] || visited[candidate]) continue;
+            visited[candidate] = 1;
+            queue[reachable++] = candidate;
+          }
+        }
+        const canReachFood = Boolean(this.food && visited[this.food.y * this.size + this.food.x]);
+        return { direction, safe, distance, reachable, canReachFood };
+      });
+      rankedMoves.sort((a, b) => Number(b.canReachFood) - Number(a.canReachFood) ||
+        b.reachable - a.reachable || a.distance - b.distance);
+      const best = rankedMoves.find(move => move.safe && move.canReachFood) || rankedMoves.find(move => move.safe);
+      return clone(best ? best.direction : this.direction);
     }
 
     step() {
@@ -294,10 +587,7 @@
         };
       }
       if (this.demo) {
-        const head = this.snake[0];
-        const index = this._cycleLookup.get(head.y * this.size + head.x);
-        const next = this._cycle[(index + 1) % this._cycle.length];
-        this.direction = { x: next.x - head.x, y: next.y - head.y };
+        this.direction = this._chooseDemoDirection();
       } else if (this._turns.length) {
         this.direction = this._turns.shift();
       }
@@ -340,14 +630,15 @@
 }());
 </script>
   <script>/* Welsh Dragon — original, resolution-independent Canvas 2D artwork.
- * World: 800 × 800. Playable cells: 24 × 24 at (112,112), 24 world units each.
+ * World: 944 × 944. Playable cells: 20 × 20 at (112,112), 36 world units each.
  * Drawing is presentation-only: no scene decoration changes collision rules.
  * DragonRenderer(canvas, options) exposes resize, setTheme, setReducedMotion,
  * burst and render. All animation follows the supplied elapsed time/delta.
  */
 (function () {
   'use strict';
-  const W = 800, O = 112, C = 24, N = 24, B = C * N, TAU = Math.PI * 2;
+  const O = 112, C = 36, N = 20, B = C * N, W = B + O * 2, TAU = Math.PI * 2;
+  const SCENERY_SIZE = 800, SCENERY_SCALE = W / SCENERY_SIZE;
   const themes = {
     grove: {
       bg: '#102a27', earth: '#1e3c30', earthLight: '#31503a',
@@ -425,11 +716,11 @@
         x: this.seeded() * W, y: this.seeded() * W,
         speed: 3 + this.seeded() * 7, phase: this.seeded() * TAU, i
       }));
-      this.resize(canvas.clientWidth || 800);
+      this.resize(canvas.clientWidth || W);
     }
 
     resize(cssWidth) {
-      const width = Math.max(1, Number(cssWidth) || this.canvas.clientWidth || 800);
+      const width = Math.max(1, Number(cssWidth) || this.canvas.clientWidth || W);
       const ratio = clamp(window.devicePixelRatio || 1, 1, 2);
       const pixelWidth = Math.max(1, Math.round(width * ratio));
       if (this.canvas.width !== pixelWidth || this.canvas.height !== pixelWidth) {
@@ -465,31 +756,33 @@
     _background() {
       if (this.cached.has(this.theme)) return this.cached.get(this.theme);
       const image = document.createElement('canvas');
-      image.width = image.height = 1600;
+      image.width = image.height = W * 2;
       const g = image.getContext('2d'); g.scale(2,2);
       const p = themes[this.theme], r = rand(72849);
+      // The original scenery is a separate surrounding layer. The actual grid
+      // and frame are drawn at their new world coordinates below.
+      g.save();g.scale(SCENERY_SCALE,SCENERY_SCALE);
       const bg = g.createRadialGradient(310,250,40,400,400,640);
       bg.addColorStop(0,p.earthLight); bg.addColorStop(.6,p.earth); bg.addColorStop(1,p.bg);
-      g.fillStyle=bg; g.fillRect(0,0,W,W);
+      g.fillStyle=bg; g.fillRect(0,0,SCENERY_SIZE,SCENERY_SIZE);
       // Gentle ground texture. Keep all contrasting scenery outside the arena.
       for (let i=0;i<620;i++) {
-        const x=r()*W,y=r()*W;
+        const x=r()*SCENERY_SIZE,y=r()*SCENERY_SIZE;
         if (x>86&&x<714&&y>86&&y<714) continue;
         ellipse(g,x,y,1+r()*4,.5+r()*2, i%3?'#b5ba7a0b':'#051a231c',r()*TAU);
       }
       this._river(g,p);
       // Far masonry: broken old courtyard wall and two little watchtowers.
-      this._wall(g,p,210,59,378,26,r);
+      this._wall(g,p,210,51,378,26,r);
       this._tower(g,p,250,44,.82);
       this._tower(g,p,558,43,.9);
       this._flag(g,565,2,p);
       // Stone steps lead into the square, never into an invisible obstacle.
       for(let i=0;i<4;i++) {
-        const y=75+i*7;
+        const y=63+i*7;
         round(g,365-i*8,y,71+i*16,7,1,p.rim,p.rimDark,.8);
         g.fillStyle='#d5d6a81d';g.fillRect(367-i*8,y,67+i*16,1);
       }
-      this._arena(g,p,r);
       // Outer landscaping, arranged to leave a crisp playable boundary.
       const rocks=[[42,161,1.1],[65,533,.9],[34,604,.85],[752,173,.85],
         [753,585,1.2],[639,754,.8],[182,741,.65],[683,40,.65],[116,41,.75]];
@@ -498,7 +791,7 @@
         [68,747,1.14],[747,749,1.2],[508,768,.64],[175,35,.58],
         [33,267,.64],[635,38,.65]].forEach(([x,y,s],i)=>this._tree(g,p,x,y,s,r,i));
       for(let i=0;i<65;i++) {
-        let x=r()*W,y=r()*W;
+        let x=r()*SCENERY_SIZE,y=r()*SCENERY_SIZE;
         if(x>89&&x<711&&y>89&&y<711)continue;
         if(x<85&&y>120&&y<680)continue;
         this._grass(g,p,x,y,.5+r()*.7,r);
@@ -517,18 +810,24 @@
       });
       if(p.snow) {
         for(let i=0;i<90;i++){
-          const x=r()*W,y=r()*W;
+          const x=r()*SCENERY_SIZE,y=r()*SCENERY_SIZE;
           if(x>106&&x<694&&y>106&&y<694)continue;
           ellipse(g,x,y,2+r()*8,.8+r()*2,'#daeee04d',-.3);
         }
       }
+      g.restore();
+      // Paint the full expanded arena over the scenery. No decoration can
+      // intrude into a playable tile, even at the outermost row or column.
+      this._arena(g,p,r);
+      g.save();g.scale(SCENERY_SCALE,SCENERY_SCALE);
       // Soft, consistent light from above-left; lower edges frame the scene.
       const light=g.createRadialGradient(155,60,0,155,60,650);
       light.addColorStop(0,this.theme==='grove'?'#e4c88917':'#c7deea12');light.addColorStop(1,'#ffffff00');
-      g.fillStyle=light;g.fillRect(0,0,W,W);
+      g.fillStyle=light;g.fillRect(0,0,SCENERY_SIZE,SCENERY_SIZE);
       const vignette=g.createRadialGradient(400,370,290,400,400,540);
       vignette.addColorStop(0,'#071c2000');vignette.addColorStop(1,'#071c2077');
-      g.fillStyle=vignette;g.fillRect(0,0,W,W);
+      g.fillStyle=vignette;g.fillRect(0,0,SCENERY_SIZE,SCENERY_SIZE);
+      g.restore();
       this.cached.set(this.theme,image);
       return image;
     }
@@ -558,19 +857,20 @@
     _arena(g,p,r) {
       g.save();
       g.shadowColor='#061c1bc0';g.shadowBlur=19;g.shadowOffsetY=11;
-      round(g,91,91,618,618,18,'#152d29');
+      round(g,O-21,O-21,B+42,B+42,18,'#152d29');
       g.shadowBlur=0;g.shadowOffsetY=0;
-      round(g,92,92,616,616,17,gradient(g,95,92,708,708,[p.rimLight,p.rim,p.rimDark]),'#82948052',1);
-      round(g,99,99,602,602,12,p.rimDark);
+      round(g,O-20,O-20,B+40,B+40,17,gradient(g,O-17,O-20,O+B+20,O+B+20,[p.rimLight,p.rim,p.rimDark]),'#82948052',1);
+      round(g,O-13,O-13,B+26,B+26,12,p.rimDark);
       // Long stone frame blocks, not an unbroken plastic outline.
-      for(let i=0;i<12;i++) {
-        let x=104+i*49.3,y=104+i*49.3;
-        round(g,x,95,47.8,12,2,i%3?p.rim:p.rimLight+'b8');
-        round(g,x,693,47.8,12,2,p.rim);
-        round(g,95,y,12,47.8,2,i%4?p.rim:p.rimLight+'a0');
-        round(g,693,y,12,47.8,2,p.rim);
+      const blockCount=Math.ceil((B+16)/49.3), blockStep=(B+16)/blockCount;
+      for(let i=0;i<blockCount;i++) {
+        const offset=O-8+i*blockStep, blockLength=blockStep-1.5;
+        round(g,offset,O-17,blockLength,12,2,i%3?p.rim:p.rimLight+'b8');
+        round(g,offset,O+B+5,blockLength,12,2,p.rim);
+        round(g,O-17,offset,12,blockLength,2,i%4?p.rim:p.rimLight+'a0');
+        round(g,O+B+5,offset,12,blockLength,2,p.rim);
       }
-      round(g,109,109,582,582,5,'#142a26','#c1bd7b52',1.2);
+      round(g,O-3,O-3,B+6,B+6,5,'#142a26','#c1bd7b52',1.2);
       g.fillStyle=p.tile;g.fillRect(O,O,B,B);
       // Almost tonal slabs establish exact cell boundaries without a checkerboard.
       for(let y=0;y<N;y++)for(let x=0;x<N;x++) {
@@ -598,13 +898,13 @@
       shade.addColorStop(0,'#d8d7ac07');shade.addColorStop(.45,'#00000000');shade.addColorStop(1,'#071e2017');
       g.fillStyle=shade;g.fillRect(O,O,B,B);
       // Quiet compass engraving: lines are decorative, deliberately below cell contrast.
-      g.save();g.translate(400,400);g.strokeStyle='#b4c69a0b';g.lineWidth=1;
+      g.save();g.translate(W/2,W/2);g.strokeStyle='#b4c69a0b';g.lineWidth=1;
       g.beginPath();g.arc(0,0,66,0,TAU);g.arc(0,0,59,0,TAU);g.stroke();
       for(let a=0;a<4;a++){
         g.rotate(Math.PI/2);poly(g,[[0,-50],[7,-9],[0,-2],[-7,-9]],'#c8d1a509');
       }g.restore();
       // Carved corner fittings, all outside the playable square.
-      [[101,101,0],[699,101,Math.PI/2],[699,699,Math.PI],[101,699,-Math.PI/2]].forEach(([x,y,a])=>{
+      [[O-11,O-11,0],[O+B+11,O-11,Math.PI/2],[O+B+11,O+B+11,Math.PI],[O-11,O+B+11,-Math.PI/2]].forEach(([x,y,a])=>{
         g.save();g.translate(x,y);g.rotate(a);
         poly(g,[[-11,-11],[9,-11],[11,-4],[4,4],[-4,11],[-11,9]],p.rimDark,'#d0cd976e',1);
         poly(g,[[-7,-7],[6,-7],[7,-3],[-3,7],[-7,6]],p.rim,'#d5d1a031',.6);
@@ -612,9 +912,9 @@
         g.restore();
       });
       // Moss rests in frame cracks rather than pretending to be a game obstacle.
-      for(let i=0;i<72;i++){
-        const side=i%4,k=120+r()*560;
-        let x=side===0?98:side===1?702:k,y=side===2?98:side===3?702:k;
+      for(let i=0;i<Math.round(B/8);i++){
+        const side=i%4,k=O+8+r()*(B-16);
+        let x=side===0?O-14:side===1?O+B+14:k,y=side===2?O-14:side===3?O+B+14:k;
         ellipse(g,x+r()*4-2,y+r()*4-2,1+r()*4,1+r()*2,p.moss+'70',r()*TAU);
       }
       g.restore();
@@ -729,14 +1029,16 @@
       const p=themes[this.theme];
       if(!this.reducedMotion) {
         // Small highlights move only over water, keeping the playfield quiet.
+        g.save();g.scale(SCENERY_SCALE,SCENERY_SCALE);
         g.strokeStyle=p.waterLight+'55';g.lineWidth=1.2;
         for(let i=0;i<9;i++){
           const yy=(i*79+t*12)%700+50,xx=46+Math.sin(yy*.014)*9;
           g.beginPath();g.moveTo(xx-4,yy);g.quadraticCurveTo(xx+2,yy+2,xx+8,yy);g.stroke();
         }
+        g.restore();
         for(const m of this.motes){
           const x=m.x+Math.sin(t*.23+m.phase)*10,y=(m.y-t*m.speed+W*20)%W;
-          if(x>103&&x<697&&y>103&&y<697)continue;
+          if(x>O-9&&x<O+B+9&&y>O-9&&y<O+B+9)continue;
           const opacity=(.2+.25*Math.sin(t*.8+m.phase));
           g.globalAlpha=Math.max(.04,opacity);
           ellipse(g,x,y,p.snow?1.5:1.2,p.snow?1.5:1.2,p.snow?'#e7efdd':'#f7d69a');
@@ -892,7 +1194,7 @@
       });
       const sm=this._smooth(pts),radii=sm.map((p,i)=>{
         const remaining=(sm.length-1-i)/Math.max(1,sm.length-1)*(snake.length-1);
-        return remaining<2.5?mix(1.5,10.3,Math.pow(remaining/2.5,.66)):10.3;
+        return remaining<2.5?mix(1.5,8.5,Math.pow(remaining/2.5,.66)):8.5;
       });
       const angleAt=(index)=>{
         const p=pts[Math.max(0,index-1)],q=pts[Math.min(pts.length-1,index+1)];
@@ -906,23 +1208,23 @@
       // One soft, coherent shadow anchors the whole animal to the ground.
       g.save();g.globalAlpha=.48;
       this._ribbon(g,sm,radii,3,7,1.35,'#081a1b');
-      ellipse(g,pts[0].x+6,pts[0].y+8,22,13,'#081a1b',headAngle);
+      ellipse(g,pts[0].x+3,pts[0].y+4,13.2,7.8,'#081a1b',headAngle);
       g.restore();
       // Feet and one pair of wings sit under the continuous body.
-      if(pts.length>3){
-        [1,Math.min(pts.length-3,5)].forEach((idx,ii)=>{
+      if(pts.length>2){
+        [...new Set([1,Math.min(pts.length-2,5)])].forEach((idx,ii)=>{
           const p=pts[idx];g.save();g.translate(p.x,p.y);g.rotate(angleAt(idx));
           const gait=this.reducedMotion?0:Math.sin(t*7+ii*2)*.15;
-          g.rotate(gait);this._leg(g,-1);this._leg(g,1);g.restore();
+          g.rotate(gait);g.scale(.8,.8);this._leg(g,-1);this._leg(g,1);g.restore();
         });
-        const shoulder=pts[Math.min(2,pts.length-2)];
+        const shoulderIndex=Math.min(2,pts.length-2),shoulder=pts[shoulderIndex];
         const flap=this.reducedMotion?1:1+Math.sin(t*2.7)*.075;
-        g.save();g.translate(shoulder.x+3,shoulder.y+7);g.rotate(angleAt(2));
-        g.globalAlpha=.24;g.scale(1.05,1.04);
-        // A silhouette shadow keeps the large membranes grounded.
+        g.save();g.translate(shoulder.x+1,shoulder.y+3);g.rotate(angleAt(shoulderIndex));
+        g.globalAlpha=.24;g.scale(.399,.3952);
+        // Compact folded wings stay within the shoulder tile.
         poly(g,[[4,4],[8,33],[-28,44],[-22,10]],'#071b20');
         poly(g,[[4,-4],[8,-33],[-28,-44],[-22,-10]],'#071b20');g.restore();
-        g.save();g.translate(shoulder.x,shoulder.y);g.rotate(angleAt(2));
+        g.save();g.translate(shoulder.x,shoulder.y);g.rotate(angleAt(shoulderIndex));g.scale(.39,.39);
         this._wing(g,-1,flap);this._wing(g,1,flap);g.restore();
       }
       // Tapered, connected ribbons prevent the "stack of circles" snake effect.
@@ -946,7 +1248,7 @@
         poly(g,[[5,-2],[-9,-5],[-6,0],[-10,5],[5,2]],'#b54f42','#642731',.8);
         poly(g,[[3,-1],[-8,-4],[-4,0]],'#edab67');g.restore();
       }
-      g.save();g.translate(pts[0].x,pts[0].y);g.rotate(headAngle);this._head(g,t,data.state);g.restore();
+      g.save();g.translate(pts[0].x,pts[0].y);g.rotate(headAngle);g.scale(.6,.82);this._head(g,t,data.state);g.restore();
       g.restore();
     }
 
@@ -992,13 +1294,9 @@
   const $ = id => document.getElementById(id);
   const canvas = $('game');
   const KEYS = { preferences:'welshDragon.grove.preferences.v1', scores:'welshDragon.grove.scores.v1', bests:'welshDragon.grove.bests.v1' };
-  const speeds = {leisure:.17, classic:.125, swift:.088};
-  const speedNames = {leisure:'Leisure', classic:'Classic', swift:'Swift'};
-  const scenes = {
-    grove:{name:'The Ember Grove',eyebrow:'AN ENCHANTED WOODLAND',caption:'THE GROVE'},
-    dusk:{name:'The Moonlit Grove',eyebrow:'A LITTLE MAGIC AFTER DARK',caption:'MOONLIT WOODLAND'},
-    frost:{name:'The Frosted Grove',eyebrow:'A WARM HEART IN A WINTER WOOD',caption:'THE FROSTED GROVE'}
-  };
+  // One relaxed arcade pace, shared by players and the demo.
+  const STEP_TIME = .090;
+  const scenes = {grove:{caption:'THE GROVE'},dusk:{caption:'MOONLIT WOODLAND'},frost:{caption:'THE FROSTED GROVE'}};
   let storageAvailable = true;
   function read(key, fallback) {
     let raw;
@@ -1015,35 +1313,42 @@
   const motionQuery = matchMedia('(prefers-reduced-motion: reduce)');
   const prefs = {
     theme:typeof stored.theme==='string' && Object.hasOwn(scenes,stored.theme) ? stored.theme:'grove',
-    pace:typeof stored.pace==='string' && Object.hasOwn(speeds,stored.pace) ? stored.pace:'classic',
     sound:stored.sound===true,
     reduced:typeof stored.reduced==='boolean' ? stored.reduced:motionQuery.matches,
     name:typeof stored.name==='string' ? stored.name.slice(0,16):''
   };
   const cleanName = value => String(value).replace(/[\u0000-\u001f\u007f]/g,'').trim().slice(0,16);
-  const scoreData = read(KEYS.scores, []);
-  let scores = (Array.isArray(scoreData) ? scoreData:[]).filter(row => row && typeof row.name==='string' && cleanName(row.name) && Number.isInteger(row.score) && row.score>0 && row.score<=569 && Object.hasOwn(speeds,row.pace)).map(row => ({name:cleanName(row.name),score:row.score,pace:row.pace,date:Number.isFinite(row.date) ? row.date:0})).sort((a,b)=>b.score-a.score || a.date-b.date).slice(0,90);
-  const bestData = read(KEYS.bests, {});
-  const bests = {};
-  Object.keys(speeds).forEach(pace => {const value=bestData && bestData[pace];bests[pace]=Number.isInteger(value)&&value>=0&&value<=569 ? value:0; scores.forEach(row=>{if(row.pace===pace)bests[pace]=Math.max(bests[pace],row.score);});});
-  const engine = new DragonEngine({size:24});
+  const LEGEND = Object.freeze({name:'Phoenix',score:189,fixed:true});
+  function normaliseScores(value){
+    const seen=new Set();
+    return (Array.isArray(value)?value:[]).filter(row=>row&&typeof row.name==='string'&&cleanName(row.name)&&Number.isInteger(Number(row.score))&&Number(row.score)>0&&Number(row.score)<=1000000)
+      .map(row=>({name:cleanName(row.name),score:Number(row.score),date:Number.isFinite(row.date)?row.date:0}))
+      .filter(row=>{if(row.name==='Phoenix'&&row.score===189)return false;const key=JSON.stringify([row.name,row.score,row.date]);if(seen.has(key))return false;seen.add(key);return true;})
+      .sort((a,b)=>b.score-a.score||a.date-b.date).slice(0,100);
+  }
+  const currentScores=read(KEYS.scores,[]), legacyScores=read('dragonLeaderboard3',[]);
+  let scores=normaliseScores([...(Array.isArray(currentScores)?currentScores:[]),...(Array.isArray(legacyScores)?legacyScores:[])]);
+  const bestData=read(KEYS.bests,{});
+  let personalBest=Math.max(0,...Object.values(bestData&&typeof bestData==='object'?bestData:{}).filter(n=>Number.isInteger(n)&&n>=0&&n<=1000000),...scores.map(row=>row.score));
+  const engine = new DragonEngine({size:20});
   const renderer = new DragonRenderer(canvas,{theme:prefs.theme,reducedMotion:prefs.reduced});
   // On a phone, result cards use the full viewport and sit above the direction pad.
   const mobileOverlayQuery=matchMedia('(max-width:480px)');
   function placeOverlays(){const parent=mobileOverlayQuery.matches?document.body:$('stage');['pauseOverlay','overOverlay'].forEach(id=>{if($(id).parentElement!==parent)parent.append($(id));});}
   placeOverlays();mobileOverlayQuery.addEventListener('change',placeOverlays);
-  let runPace=prefs.pace, accumulator=0, lastTime=performance.now(), pausedAlpha=1, savedRun=-1, toastTimer=0, demoTimer=0;
-  let audioContext;
+  let accumulator=0, lastTime=performance.now(), pausedAlpha=1, savedRun=-1, toastTimer=0;
+  let audioContext, resumeAfterDialog=null;
   const pad = n => String(n).padStart(2,'0');
   const editable = element => element instanceof Element && !!element.closest('input,textarea,select,[contenteditable="true"]');
   function announce(text) { $('liveMessage').textContent=text; }
+  function focusPlayfield(){if(!document.querySelector('dialog[open]')&&['ready','playing','paused'].includes(engine.state))canvas.focus({preventScroll:true});}
   function toast(text) {
     clearTimeout(toastTimer); $('collectToast').textContent=text; $('collectToast').classList.add('visible');
     toastTimer=setTimeout(()=>$('collectToast').classList.remove('visible'),1900);
   }
-  function ensureAudio() {
-    if (!prefs.sound) return;
-    try { const Context=window.AudioContext || window.webkitAudioContext; if(!Context)return; if(!audioContext)audioContext=new Context(); if(audioContext.state==='suspended')audioContext.resume().catch(()=>{}); } catch (_) { /* Sound is optional. */ }
+  async function ensureAudio() {
+    if (!prefs.sound) return false;
+    try { const Context=window.AudioContext || window.webkitAudioContext; if(!Context)return false; if(!audioContext)audioContext=new Context(); if(audioContext.state==='suspended')await audioContext.resume();return audioContext.state==='running'; } catch (_) { return false; }
   }
   function playSound(kind) {
     if(!prefs.sound || !audioContext || audioContext.state!=='running')return;
@@ -1058,101 +1363,117 @@
     $('soundBtn').querySelector('use').setAttribute('href',prefs.sound?'#i-sound':'#i-mute');
     $('soundSetting').checked=prefs.sound;
   }
-  function setSound(value) {prefs.sound=Boolean(value);updateSound();persist(KEYS.preferences,prefs);ensureAudio();if(value)playSound('start');}
+  async function setSound(value) {prefs.sound=Boolean(value);updateSound();persist(KEYS.preferences,prefs);if(value&&await ensureAudio())playSound('start');focusPlayfield();}
   function setTheme(theme, save=true) {
     if(!Object.hasOwn(scenes,theme))return;
     prefs.theme=theme;renderer.setTheme(theme);
-    $('sceneName').textContent=scenes[theme].name;$('sceneEyebrow').textContent=scenes[theme].eyebrow;$('arenaCaption').textContent=scenes[theme].caption;
+    $('arenaCaption').textContent=scenes[theme].caption;
     document.querySelectorAll('[data-theme]').forEach(button=>{const active=button.dataset.theme===theme;button.classList.toggle('active',active);button.setAttribute('aria-pressed',String(active));});
     if(save)persist(KEYS.preferences,prefs);
   }
   function setMotion(value,save=true) {prefs.reduced=Boolean(value);document.body.classList.toggle('reduced-motion',prefs.reduced);$('motionSetting').checked=prefs.reduced;renderer.setReducedMotion(prefs.reduced);if(save)persist(KEYS.preferences,prefs);}
   function updateHUD() {
     $('score').textContent=pad(engine.score);$('length').textContent=pad(engine.snake.length);
-    $('best').textContent=pad(bests[runPace]);$('speedBadge').textContent=engine.demo?'Demo':speedNames[runPace];
+    $('best').textContent=pad(personalBest);
   }
   function updateState() {
     const state=engine.state;
     $('readyOverlay').hidden=state!=='ready';$('pauseOverlay').hidden=state!=='paused';$('overOverlay').hidden=state!=='over'&&state!=='won';
     $('demoTag').hidden=!engine.demo;$('stopDemoBtn').hidden=!engine.demo;$('toolbarHint').hidden=engine.demo;
+    $('demoToggleBtn').setAttribute('aria-pressed',String(engine.demo));
+    $('demoToggleBtn').setAttribute('aria-label',engine.demo?'Stop demo and take control':'Start demo');
     $('pauseBtn').disabled=state!=='playing'&&state!=='paused';
     $('pauseBtn').querySelector('span').textContent=state==='paused'?'Resume':'Pause';
     $('pauseBtn').querySelector('use').setAttribute('href',state==='paused'?'#i-play':'#i-pause');
     $('pauseBtn').setAttribute('aria-label',state==='paused'?'Resume game':'Pause game');
-    $('stateLabel').textContent=state==='playing'?(engine.demo?'Watching a legend':'Adventure in progress'):state==='paused'?'Taking a breather':state==='over'?'Until next time':state==='won'?'A true legend':'Ready to roam';
+    $('stateLabel').textContent=state==='playing'?(engine.demo?'Demo':engine.usedDemo?'Practice':'Playing'):state==='paused'?'Paused':state==='over'?'Game over':state==='won'?'Complete':'Ready';
     $('stateLabel').dataset.state=state;updateHUD();
   }
   function renderLeaderboard() {
-    const filter=$('leaderboardMode').value;
-    const records=scores.filter(row=>filter==='all'||row.pace===filter).slice(0,10);
+    // Phoenix is an intentional, permanent first row. All scenes share the rest.
+    const records=[LEGEND,...scores.slice(0,9)];
     const list=$('leaderboard');list.replaceChildren();
-    records.forEach((row,index)=>{const li=document.createElement('li'),rank=document.createElement('span'),name=document.createElement('div'),label=document.createElement('strong'),pace=document.createElement('small'),score=document.createElement('span');rank.className='rank';rank.textContent=String(index+1).padStart(2,'0');name.className='rank-name';label.textContent=row.name;pace.textContent=speedNames[row.pace];name.append(label,pace);score.className='rank-score';score.textContent=row.score;li.append(rank,name,score);list.append(li);});
-    $('emptyScores').hidden=records.length>0;
+    records.forEach((row,index)=>{const li=document.createElement('li'),rank=document.createElement('span'),name=document.createElement('div'),label=document.createElement('strong'),score=document.createElement('span');rank.className='rank';rank.textContent='#'+(index+1);name.className='rank-name';label.textContent=row.name;name.append(label);score.className='rank-score';score.textContent=row.score;if(row.fixed){const detail=document.createElement('small');detail.textContent='Legend';name.append(detail);li.className='legend-entry';li.setAttribute('aria-label','#1 Phoenix 189');}li.append(rank,name,score);list.append(li);});
+    $('emptyScores').hidden=scores.length>0;
     if(!storageAvailable)$('storageNote').textContent='Scores last for this visit. Browser storage is unavailable.';
   }
   function resetResult() {
     savedRun=-1;$('saveScoreBtn').disabled=false;$('saveScoreBtn').textContent='Save';$('playerName').disabled=false;$('playerName').value=prefs.name;$('saveStatus').textContent='';$('newBest').hidden=true;
   }
-  function begin(demo=false,initialDirection) {
-    clearTimeout(demoTimer);clearTimeout(toastTimer);$('collectToast').classList.remove('visible');
-    engine.reset({demo});runPace=prefs.pace;resetResult();engine.start(initialDirection);
-    accumulator=-.25;pausedAlpha=0;lastTime=performance.now();ensureAudio();if(!demo)playSound('start');
+  function begin(demo=false,initialDirection,instant=false) {
+    clearTimeout(toastTimer);$('collectToast').classList.remove('visible');
+    engine.reset({demo});resetResult();engine.start(initialDirection);
+    accumulator=instant?0:-.25;pausedAlpha=0;lastTime=performance.now();const startingRun=engine.runId;ensureAudio().then(ready=>{if(ready&&!demo&&engine.runId===startingRun)playSound('start');});
     updateState();canvas.focus({preventScroll:true});announce(demo?'Demo started. Demo scores do not count.':'Adventure started. Use arrows or W A S D to steer.');
   }
-  function goHome() {clearTimeout(demoTimer);engine.reset();runPace=prefs.pace;accumulator=0;pausedAlpha=1;resetResult();updateState();$('startBtn').focus({preventScroll:true});announce('Ready for a new adventure.');}
+  function goHome() {engine.reset();accumulator=0;pausedAlpha=1;resetResult();updateState();$('startBtn').focus({preventScroll:true});announce('Ready to play.');}
+  function takeControl() {
+    if(!engine.demo)return;
+    engine.setDemo(false);updateState();focusPlayfield();
+    announce('You control the dragon now. This is a practice run. New run starts a scored game.');
+  }
+  function toggleDemo() {if(engine.demo)takeControl();else begin(true);}
   function pause(reason='Your adventure is right where you left it.') {
     if(engine.state!=='playing')return;
-    pausedAlpha=Math.max(0,Math.min(1,accumulator/(engine.demo ? .078 : speeds[runPace])));
+    pausedAlpha=Math.max(0,Math.min(1,accumulator/STEP_TIME));
     engine.pause();$('pauseReason').textContent=reason;updateState();announce('Game paused.');
   }
-  function resume() {if(!engine.resume())return;accumulator=pausedAlpha*(engine.demo ? .078 : speeds[runPace]);lastTime=performance.now();ensureAudio();updateState();canvas.focus({preventScroll:true});announce('Adventure resumed.');}
+  function resume() {if(!engine.resume())return;accumulator=pausedAlpha*STEP_TIME;lastTime=performance.now();ensureAudio();updateState();canvas.focus({preventScroll:true});announce('Adventure resumed.');}
   function togglePause() {if(engine.state==='playing')pause();else if(engine.state==='paused')resume();}
   function endRun(event) {
-    if(engine.demo) {updateState();$('scoreForm').hidden=true;$('resultTitle').textContent='A legendary tour.';$('resultReason').textContent='You have seen how it works. Ready to take the reins?';$('resultEyebrow').textContent='DEMO COMPLETE';$('finalScore').textContent=engine.score;const completed=engine.runId;demoTimer=setTimeout(()=>{if(engine.demo&&engine.runId===completed&&engine.state==='won'&&!document.hidden&&!document.querySelector('dialog[open]'))begin(true);},4500);return;}
-    const isWin=event.type==='won';const previousBest=bests[runPace];
-    if(engine.score>previousBest){bests[runPace]=engine.score;persist(KEYS.bests,bests);}
-    $('resultTitle').textContent=isWin?'You filled the whole grove.':'A fine little adventure.';
-    $('resultEyebrow').textContent=isWin?'A TRULY LEGENDARY DRAGON':'ANOTHER TALE TO TELL';
-    $('resultReason').textContent=isWin?'Every tile explored. Every tankard claimed.':event.reason==='self'?'Your tail had other plans. Leave a little more room.':'The stone boundary caught you. Try turning a little sooner.';
-    $('finalScore').textContent=engine.score;$('finalScore').nextElementSibling.textContent=engine.score===1?'tankard collected':'tankards collected';$('newBest').hidden=engine.score<=previousBest||engine.score===0;$('scoreForm').hidden=engine.score===0;
+    if(engine.demo) {
+      // The uploaded game restarts its demo immediately, without a result card.
+      begin(true,undefined,true);
+      return;
+    }
+    const isWin=event.type==='won';const previousBest=personalBest;
+    if(!engine.usedDemo&&engine.score>previousBest){personalBest=engine.score;persist(KEYS.bests,{all:personalBest});}
+    $('resultTitle').textContent=isWin?'Field complete!':'Game over';
+    $('resultEyebrow').textContent=engine.usedDemo?'PRACTICE RUN':'YOUR RESULT';
+    $('resultReason').textContent=engine.usedDemo?'Practice run finished. Start a new run to save a score.':isWin?'You collected every tankard and filled the field.':event.reason==='self'?'You ran into your tail.':'You reached the edge of the field.';
+    $('finalScore').textContent=engine.score;$('finalScore').nextElementSibling.textContent=engine.score===1?'tankard collected':'tankards collected';$('newBest').hidden=engine.usedDemo||engine.score<=previousBest||engine.score===0;$('scoreForm').hidden=engine.usedDemo||engine.score===0;
     renderer.burst(engine.snake[0],isWin?'collect':'collision');playSound(isWin?'win':'over');updateState();
     announce((isWin?'Grove complete.':'Adventure finished.')+' '+engine.score+(engine.score===1?' tankard collected.':' tankards collected.'));
-    (engine.score>0 ? $('playerName'):$('retryBtn')).focus({preventScroll:true});
+    (engine.score>0&&!engine.usedDemo ? $('playerName'):$('retryBtn')).focus({preventScroll:true});
   }
   function steer(direction) {
     if(document.querySelector('dialog[open]'))return;
     if(engine.state==='ready'){if(direction==='left')return;begin(false,direction);}
     else if(engine.state==='playing')engine.queue(direction);
   }
-  function openDialog(dialog) {pause('Your dragon is waiting. Close the menu and resume when you are ready.');dialog.showModal();}
+  function openDialog(dialog) {resumeAfterDialog=engine.state==='playing'?engine.runId:null;pause('Your dragon is waiting while you use the menu.');pointer=null;dialog.showModal();}
 
-  $('startBtn').addEventListener('click',()=>begin());$('demoBtn').addEventListener('click',()=>begin(true));$('retryBtn').addEventListener('click',()=>begin());$('restartBtn').addEventListener('click',()=>begin());$('stopDemoBtn').addEventListener('click',()=>begin());$('backBtn').addEventListener('click',goHome);
+  $('startBtn').addEventListener('click',()=>begin());$('demoBtn').addEventListener('click',()=>begin(true));$('demoToggleBtn').addEventListener('click',toggleDemo);$('retryBtn').addEventListener('click',()=>begin());$('restartBtn').addEventListener('click',()=>begin());$('stopDemoBtn').addEventListener('click',takeControl);$('backBtn').addEventListener('click',goHome);
   $('pauseBtn').addEventListener('click',togglePause);$('resumeBtn').addEventListener('click',resume);
   $('helpBtn').addEventListener('click',()=>openDialog($('helpDialog')));$('settingsBtn').addEventListener('click',()=>openDialog($('settingsDialog')));
   document.querySelectorAll('[data-close-dialog]').forEach(button=>button.addEventListener('click',()=>button.closest('dialog').close()));
-  document.querySelectorAll('dialog').forEach(dialog=>dialog.addEventListener('click',event=>{if(event.target===dialog){const bounds=dialog.getBoundingClientRect();if(event.clientX<bounds.left||event.clientX>bounds.right||event.clientY<bounds.top||event.clientY>bounds.bottom)dialog.close();}}));
+  document.querySelectorAll('dialog').forEach(dialog=>{
+    dialog.addEventListener('click',event=>{if(event.target===dialog){const bounds=dialog.getBoundingClientRect();if(event.clientX<bounds.left||event.clientX>bounds.right||event.clientY<bounds.top||event.clientY>bounds.bottom)dialog.close();}});
+    dialog.addEventListener('close',()=>{const shouldResume=resumeAfterDialog===engine.runId;resumeAfterDialog=null;if(shouldResume&&!document.hidden)resume();else focusPlayfield();});
+  });
   $('soundBtn').addEventListener('click',()=>setSound(!prefs.sound));$('soundSetting').addEventListener('change',event=>setSound(event.target.checked));$('motionSetting').addEventListener('change',event=>setMotion(event.target.checked));
-  document.querySelectorAll('[data-theme]').forEach(button=>button.addEventListener('click',()=>setTheme(button.dataset.theme)));
-  document.querySelectorAll('[name=pace]').forEach(input=>{input.checked=input.value===prefs.pace;input.addEventListener('change',()=>{if(!input.checked)return;prefs.pace=input.value;persist(KEYS.preferences,prefs);if(engine.state==='ready'){runPace=prefs.pace;updateHUD();}});});
-  $('leaderboardMode').addEventListener('change',renderLeaderboard);
+  document.querySelectorAll('[data-theme]').forEach(button=>button.addEventListener('click',()=>{setTheme(button.dataset.theme);focusPlayfield();}));
   $('scoreForm').addEventListener('submit',event=>{
-    event.preventDefault();if(engine.demo||engine.score<=0||(engine.state!=='over'&&engine.state!=='won')||savedRun===engine.runId)return;
+    event.preventDefault();if(engine.usedDemo||engine.score<=0||(engine.state!=='over'&&engine.state!=='won')||savedRun===engine.runId)return;
     const name=cleanName($('playerName').value);
     if(!name){$('saveStatus').textContent='Add a name first.';$('playerName').focus();return;}
-    scores.push({name,score:engine.score,pace:runPace,date:Date.now()});
-    // Keep a separate top 30 for each pace, so one pace cannot crowd out the others.
-    scores=scores.sort((a,b)=>b.score-a.score||a.date-b.date).filter((row,index,all)=>all.slice(0,index).filter(other=>other.pace===row.pace).length<30);
+    scores.push({name,score:engine.score,date:Date.now()});
+    scores=normaliseScores(scores);
     const durable=persist(KEYS.scores,scores);savedRun=engine.runId;prefs.name=name;persist(KEYS.preferences,prefs);
     $('saveScoreBtn').disabled=true;$('saveScoreBtn').textContent='Saved';$('playerName').disabled=true;$('saveStatus').textContent=durable?'Your adventure is saved in this browser.':'Saved for this visit. Browser storage is unavailable.';
-    $('leaderboardMode').value=runPace;renderLeaderboard();announce('Score saved for '+name+'.');
+    renderLeaderboard();announce('Score saved for '+name+'.');
   });
 
   const directionKeys={arrowup:'up',w:'up',arrowdown:'down',s:'down',arrowleft:'left',a:'left',arrowright:'right',d:'right'};
+  const physicalDirections={KeyW:'up',KeyS:'down',KeyA:'left',KeyD:'right'};
   document.addEventListener('keydown',event=>{
     if(editable(event.target)||document.querySelector('dialog[open]')||event.ctrlKey||event.metaKey||event.altKey)return;
     const key=event.key.toLowerCase();
-    if(directionKeys[key]){event.preventDefault();if(!event.repeat)steer(directionKeys[key]);return;}
-    if(key===' '||key==='p'){
+    const direction=directionKeys[key]||physicalDirections[event.code];
+    if(direction){event.preventDefault();if(!event.repeat)steer(direction);return;}
+    if(key==='0'||event.code==='Digit0'||event.code==='Numpad0'){event.preventDefault();if(!event.repeat)toggleDemo();return;}
+    if(key==='r'||event.code==='KeyR'){event.preventDefault();if(!event.repeat)begin();return;}
+    if(key===' '||key==='p'||event.code==='KeyP'){
       if(key===' '&&event.target.closest?.('button,a'))return;
       event.preventDefault();if(event.repeat)return;
       if(engine.state==='ready')begin();else togglePause();
@@ -1160,9 +1481,9 @@
   });
   document.querySelectorAll('[data-direction]').forEach(button=>button.addEventListener('pointerdown',event=>{event.preventDefault();steer(button.dataset.direction);}));
   // Keyboard and assistive activation also work on the direction pad.
-  document.querySelectorAll('[data-direction]').forEach(button=>button.addEventListener('click',event=>{if(event.detail===0)steer(button.dataset.direction);}));
+  document.querySelectorAll('[data-direction]').forEach(button=>button.addEventListener('click',()=>steer(button.dataset.direction)));
   let pointer=null;
-  canvas.addEventListener('pointerdown',event=>{if(event.pointerType==='mouse'||pointer!==null)return;pointer={id:event.pointerId,x:event.clientX,y:event.clientY};canvas.setPointerCapture(event.pointerId);});
+  canvas.addEventListener('pointerdown',event=>{if((event.pointerType==='mouse'&&event.button!==0)||pointer!==null)return;event.preventDefault();focusPlayfield();pointer={id:event.pointerId,x:event.clientX,y:event.clientY};try{canvas.setPointerCapture(event.pointerId);}catch(_){}});
   canvas.addEventListener('pointermove',event=>{
     if(!pointer||event.pointerId!==pointer.id)return;
     const dx=event.clientX-pointer.x,dy=event.clientY-pointer.y;
@@ -1173,20 +1494,39 @@
   });
   function clearPointer(event){if(pointer&&event.pointerId===pointer.id)pointer=null;}
   canvas.addEventListener('pointerup',clearPointer);canvas.addEventListener('pointercancel',clearPointer);canvas.addEventListener('lostpointercapture',clearPointer);
-  document.addEventListener('visibilitychange',()=>{if(document.hidden)pause('You stepped away, so your dragon took a breather.');});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden){resumeAfterDialog=null;pause('You stepped away, so your dragon took a breather.');}});
   window.addEventListener('blur',()=>pause('You stepped away, so your dragon took a breather.'));
-  if(!document.fullscreenEnabled||!$('app').requestFullscreen)$('fullscreenBtn').hidden=true;
-  $('fullscreenBtn').addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await $('app').requestFullscreen();}catch(_){toast('Fullscreen is not available in this browser.');}});
-  document.addEventListener('fullscreenchange',()=>{$('fullscreenBtn').setAttribute('aria-label',document.fullscreenElement?'Exit fullscreen':'Enter fullscreen');renderer.resize(canvas.clientWidth);});
-  $('downloadBtn').addEventListener('click',()=>{const blob=new Blob([originalDocument],{type:'text/html;charset=utf-8'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='welsh-dragon.html';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);});
+  function updateExpandedState(){const active=!!document.fullscreenElement||document.body.classList.contains('focus-view');$('fullscreenBtn').setAttribute('aria-label',active?'Exit expanded view':'Expand game');$('fullscreenBtn').setAttribute('aria-pressed',String(active));$('fullscreenBtn').title=active?'Exit expanded view':'Expand game';renderer.resize(canvas.clientWidth);}
+  $('fullscreenBtn').addEventListener('click',async()=>{
+    if(document.fullscreenElement){await document.exitFullscreen();}
+    else if(document.body.classList.contains('focus-view'))document.body.classList.remove('focus-view');
+    else{try{if(!document.fullscreenEnabled||!document.documentElement.requestFullscreen)throw new Error('unavailable');await document.documentElement.requestFullscreen();}catch(_){document.body.classList.add('focus-view');}}
+    updateExpandedState();focusPlayfield();
+  });
+  document.addEventListener('fullscreenchange',updateExpandedState);
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'&&document.body.classList.contains('focus-view')&&!document.querySelector('dialog[open]')){document.body.classList.remove('focus-view');updateExpandedState();focusPlayfield();}});
+
+  // Load the real sibling file. A failed request must never hide its panel.
+  const linkImage=$('linkImage');
+  function updateImageStatus(){
+    const missing=linkImage.complete&&linkImage.naturalWidth===0;
+    $('linkImageError').hidden=!missing;
+    linkImage.classList.toggle('image-unavailable',missing);
+  }
+  linkImage.addEventListener('load',updateImageStatus);
+  linkImage.addEventListener('error',updateImageStatus);
+  if(linkImage.complete)updateImageStatus();
+  $('downloadBtn').addEventListener('click',()=>{
+    const blob=new Blob([originalDocument],{type:'text/html;charset=utf-8'});const url=URL.createObjectURL(blob);const link=document.createElement('a');link.href=url;link.download='welsh-dragon-play-v3.html';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);focusPlayfield();
+  });
   if('ResizeObserver'in window)new ResizeObserver(()=>renderer.resize(canvas.clientWidth)).observe($('stage'));else window.addEventListener('resize',()=>renderer.resize(canvas.clientWidth));
-  updateSound();setMotion(prefs.reduced,false);setTheme(prefs.theme,false);renderLeaderboard();updateState();
+  updateSound();setMotion(prefs.reduced,false);setTheme(prefs.theme,false);renderLeaderboard();updateState();updateExpandedState();
   // Fixed simulation ticks with bounded catch-up; every segment is interpolated.
   function frame(now) {
     const dt=Math.min(.25,Math.max(0,(now-lastTime)/1000));lastTime=now;
     let alpha=engine.state==='paused'?pausedAlpha:1;
     if(engine.state==='playing'){
-      const stepTime=engine.demo ? .078 : speeds[runPace];accumulator+=dt;
+      const stepTime=STEP_TIME;accumulator+=dt;
       let steps=0;
       while(accumulator>=stepTime&&engine.state==='playing'&&steps<5){
         accumulator-=stepTime;steps++;
